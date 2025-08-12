@@ -1,9 +1,6 @@
-/* =========================================================
-   Styles exclusivos del Hero
-   ========================================================= */
-
-/* Grid y áreas del Hero */
+/* ===== Hero layout base (se mantiene) ===== */
 .hero{
+  position: relative;
   display:grid;
   grid-template-columns: 1fr;
   grid-template-areas:
@@ -22,155 +19,162 @@
     gap: 40px;
   }
 }
-.hero__copy{ grid-area: copy; }
+.hero__copy{
+  grid-area: copy;
+  position: relative;
+  z-index: 5;
+}
 
-/* Foto COMPLETA (sin recortar, sin bordes) */
+/* ===== Tipografía grande al estilo del boceto ===== */
+.hero__kicker{
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: clamp(25px, 1.6vw, 20px);
+  margin-bottom: 6px;
+}
+
+.hero__name{
+  margin: 0;
+  line-height: .9;
+  text-transform: uppercase;
+  color: var(#e6cd92);            /* crema */
+}
+.hero__name-line{
+  
+  display: block;
+  font-weight: 800;
+  font-size: clamp(56px, 9vw, 112px);   /* grande y responsive */
+}
+
+.hero__tagline{
+  margin-top: 14px;
+  color: var(--text); 
+  color: var(--accent);           /* mismo tono que el boceto (no dim) */
+  font-size: clamp(16px, 2vw, 22px);
+  max-width: 34ch;
+}
+
+/* CTA */
+.hero__cta{
+  display:flex; gap:12px; flex-wrap:wrap;
+  margin-top: 18px;
+}
+.btn{ display:inline-block; padding:.78rem 1.05rem; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,.05); transition:.2s ease; }
+.btn:hover{ background:rgba(255,255,255,.1); }
+.btn--solid{ background: var(--accent); border-color: transparent; color:#0b0b0b; font-weight: 700; }
+.btn--solid:hover{ filter: brightness(1.06); }
+.btn--ghost{ border-color: var(--accent); color: var(--accent); background: rgba(255,255,255,.04); }
+.btn--ghost:hover{ background: rgba(255,255,255,.08); }
+
+/* ===== Foto con máscaras laterales y fades (como dejamos) ===== */
 .hero__photo{
   grid-area: photo;
   justify-self: end;
   width: 100%;
-  max-width: 520px;            /* ajustá si necesitás */
+  max-width: 520px;
   position: relative;
-  isolation: isolate;          /* stacking context propio */
+  isolation: isolate;
+  z-index: 1;
+  --feather-x: 8%;
 }
+@media (max-width: 900px){ .hero__photo{ --feather-x: 10%; } }
+
 .photo-full{
   display: block;
   width: 100%;
-  height: auto;                /* imagen completa */
-  object-fit: contain;         /* sin recorte */
+  height: auto;
+  object-fit: contain;
   object-position: center;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  -webkit-mask-image: none;
-  mask-image: none;
-  filter: none;
+  border: 0; border-radius: 0; box-shadow: none; background: transparent;
+  /* Pluma lateral muy suave que se pierde en el fondo */
+  -webkit-mask-image: linear-gradient(to right,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,1) var(--feather-x),
+    rgba(0,0,0,1) calc(100% - var(--feather-x)),
+    rgba(0,0,0,0) 100%);
+          mask-image: linear-gradient(to right,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,1) var(--feather-x),
+    rgba(0,0,0,1) calc(100% - var(--feather-x)),
+    rgba(0,0,0,0) 100%);
 }
 
-/* =========================================================
-   Overlays: laterales con blur + fades arriba/abajo
-   ========================================================= */
-
-/* Base overlays */
-.edge, .fade-bottom{
-  position: absolute;
-  pointer-events: none;
-  z-index: 2;
-  background: transparent;              /* no pintan color por sí mismos */
-}
-
-/* Left + Right (blur sin tinte) */
-.edge-left{
-  top: -12%; bottom: -12%; left: -12%;
-  width: 26%;
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 95%);
-          mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 95%);
-}
-.edge-right{
-  top: -12%; bottom: -12%; right: -12%;
-  width: 26%;
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 95%);
-          mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 95%);
-}
-
-/* Mini fade superior 1–2% para camuflar el borde */
+/* Mini fade superior 2% y fade inferior 22% */
 .hero__photo::before{
   content:"";
-  position:absolute;
-  left: -6%; right: -6%; top: -1%;
-  height: 2%;
-  z-index: 3;
-  pointer-events:none;
-  -webkit-backdrop-filter: none;
-          backdrop-filter: none;
+  position:absolute; left:0; right:0; top:0; height:2%;
+  z-index:3; pointer-events:none;
   background: linear-gradient(to bottom, rgba(11,11,11,1) 0%, rgba(11,11,11,0) 100%);
 }
-
-/* Fade inferior profundo (22%) + leve blur para fundir */
 .fade-bottom{
-  left: -6%; right: -6%; bottom: -3%;
-  height: 22%;
-  z-index: 3;
-  -webkit-backdrop-filter: blur(4px);
-          backdrop-filter: blur(4px);
+  position:absolute; left:0; right:0; bottom:0; height:22%;
+  z-index:3; pointer-events:none;
   background: linear-gradient(
     to bottom,
     rgba(11,11,11,0.00) 0%,
-    rgba(11,11,11,0.20) 35%,
-    rgba(11,11,11,0.55) 70%,
-    rgba(11,11,11,1.00) 100%
-  );
+    rgba(11,11,11,0.22) 32%,
+    rgba(11,11,11,0.60) 72%,
+    rgba(11,11,11,1.00) 100%);
 }
 
-/* Responsive suavizado */
-@media (max-width: 900px){
-  .edge-left, .edge-right{
-    width: 22%;
-    -webkit-backdrop-filter: blur(8px);
-            backdrop-filter: blur(8px);
-  }
-  .hero__photo::before{ top: -1.2%; height: 2.2%; }
-  .fade-bottom{
-    height: 24%;
-    -webkit-backdrop-filter: blur(5px);
-            backdrop-filter: blur(5px);
-  }
-}
-
-/* =========================================================
-   Tech belt (iconos) – estilo tipo boceto
-   ========================================================= */
-
+/* ===== Carrusel de iconos centrado y superponible ===== */
 .hero__icons{
   grid-area: icons;
-  place-self: start;                 /* ancla a la columna izquierda */
+  position: relative;
+  z-index: 6; /* sobre la foto en desktop */
+  width: 100%;
+  display: grid; place-items: center;
   margin-top: 18px;
 }
-.tech-belt{
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
-  padding: 2px 0;
-}
-.tech{
-  position: relative;
-  width: 40px; height: 40px;
-  display: grid; place-items: center;
-}
-.tech svg{
-  width: 22px; height: 22px;
-  color: var(--accent);
-  opacity: .9;
-  transition: transform .2s ease, opacity .2s ease, filter .2s ease;
+@media (min-width:900px){
+  .hero__icons{ grid-column: 1 / -1; margin-top: -24px; }
 }
 
-/* Badge/contorno detrás del icono */
-.tech__badge{
-  position: absolute;
-  inset: 0;
-  margin: 4px;                     /* grosor del contorno */
-  border: 1.5px solid var(--accent);
-  opacity: .9;
-  filter: drop-shadow(0 0 10px rgba(179,195,0,.25));
+:root{
+  --tech-size: 52px;
+  --tech-icon: 28px;
+  --tech-gap: 18px;
+  --belt-width: 760px;  /* 6–7 visibles */
+  --scroll-speed: 28s;
 }
 
-/* Formas de badge */
+.marquee{
+  width: 100%;
+  max-width: var(--belt-width);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+.track{
+  display:flex; align-items:center; gap:var(--tech-gap);
+  width:max-content;
+  animation: scroll var(--scroll-speed) linear infinite;
+}
+.track:hover{ animation-play-state: paused; }
+@keyframes scroll{
+  from{ transform: translateX(0); }
+  to  { transform: translateX(-50%); }
+}
+
+.tech{ position:relative; width:var(--tech-size); height:var(--tech-size); display:grid; place-items:center; }
+.tech svg{ width:var(--tech-icon); height:var(--tech-icon); color:var(--accent); opacity:.95; transition:transform .2s, filter .2s, opacity .2s; }
+.tech__badge{ position:absolute; inset:0; margin:5px; border:1.6px solid var(--accent); opacity:.95; filter:drop-shadow(0 0 10px rgba(179,195,0,.25)); }
 .tech.hex   .tech__badge{ clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%); }
 .tech.diamond .tech__badge{ transform: rotate(45deg); border-radius: 8px; }
 .tech.circle  .tech__badge{ border-radius: 999px; }
+.tech::after{
+  content: attr(data-label);
+  position:absolute; left:50%; top:calc(100% + 10px); transform:translateX(-50%);
+  background: rgba(255,255,255,0.06); border:1px solid var(--border);
+  padding:4px 8px; border-radius:8px; font-size:12px; color:var(--text-dim);
+  white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .15s, transform .15s;
+}
+.tech:hover::after{ opacity:1; transform:translateX(-50%) translateY(-2px); }
+.tech:hover svg{ transform: translateY(-2px) scale(1.05); filter: drop-shadow(0 0 8px rgba(179,195,0,.28)); }
 
-/* Hover sutil (no chillón) */
-.tech:hover svg{ transform: translateY(-2px) scale(1.03); opacity: 1; filter: drop-shadow(0 0 6px rgba(179,195,0,.25)); }
-
-/* En pantallas pequeñas apretamos un poco el gap */
-@media (max-width: 520px){
-  .tech-belt{ gap: 12px; }
-  .tech{ width: 36px; height: 36px; }
-  .tech svg{ width: 20px; height: 20px; }
+@media (max-width:900px){
+  .hero__icons{ margin-top:16px; z-index: 2; }
+  :root{ --belt-width: 100%; --tech-size: 48px; --tech-icon: 26px; --tech-gap: 16px; --scroll-speed: 24s; }
 }
