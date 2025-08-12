@@ -1,0 +1,176 @@
+/* =========================================================
+   Styles exclusivos del Hero
+   ========================================================= */
+
+/* Grid y áreas del Hero */
+.hero{
+  display:grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "copy"
+    "photo"
+    "icons";
+  gap: 28px;
+  align-items:center;
+}
+@media (min-width: 900px){
+  .hero{
+    grid-template-columns: 1.1fr .9fr;
+    grid-template-areas:
+      "copy  photo"
+      "icons photo";
+    gap: 40px;
+  }
+}
+.hero__copy{ grid-area: copy; }
+
+/* Foto COMPLETA (sin recortar, sin bordes) */
+.hero__photo{
+  grid-area: photo;
+  justify-self: end;
+  width: 100%;
+  max-width: 520px;            /* ajustá si necesitás */
+  position: relative;
+  isolation: isolate;          /* stacking context propio */
+}
+.photo-full{
+  display: block;
+  width: 100%;
+  height: auto;                /* imagen completa */
+  object-fit: contain;         /* sin recorte */
+  object-position: center;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  -webkit-mask-image: none;
+  mask-image: none;
+  filter: none;
+}
+
+/* =========================================================
+   Overlays: laterales con blur + fades arriba/abajo
+   ========================================================= */
+
+/* Base overlays */
+.edge, .fade-bottom{
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  background: transparent;              /* no pintan color por sí mismos */
+}
+
+/* Left + Right (blur sin tinte) */
+.edge-left{
+  top: -12%; bottom: -12%; left: -12%;
+  width: 26%;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 95%);
+          mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 95%);
+}
+.edge-right{
+  top: -12%; bottom: -12%; right: -12%;
+  width: 26%;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 95%);
+          mask-image: linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 95%);
+}
+
+/* Mini fade superior 1–2% para camuflar el borde */
+.hero__photo::before{
+  content:"";
+  position:absolute;
+  left: -6%; right: -6%; top: -1%;
+  height: 2%;
+  z-index: 3;
+  pointer-events:none;
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+  background: linear-gradient(to bottom, rgba(11,11,11,1) 0%, rgba(11,11,11,0) 100%);
+}
+
+/* Fade inferior profundo (22%) + leve blur para fundir */
+.fade-bottom{
+  left: -6%; right: -6%; bottom: -3%;
+  height: 22%;
+  z-index: 3;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  background: linear-gradient(
+    to bottom,
+    rgba(11,11,11,0.00) 0%,
+    rgba(11,11,11,0.20) 35%,
+    rgba(11,11,11,0.55) 70%,
+    rgba(11,11,11,1.00) 100%
+  );
+}
+
+/* Responsive suavizado */
+@media (max-width: 900px){
+  .edge-left, .edge-right{
+    width: 22%;
+    -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+  }
+  .hero__photo::before{ top: -1.2%; height: 2.2%; }
+  .fade-bottom{
+    height: 24%;
+    -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+  }
+}
+
+/* =========================================================
+   Tech belt (iconos) – estilo tipo boceto
+   ========================================================= */
+
+.hero__icons{
+  grid-area: icons;
+  place-self: start;                 /* ancla a la columna izquierda */
+  margin-top: 18px;
+}
+.tech-belt{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 2px 0;
+}
+.tech{
+  position: relative;
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+}
+.tech svg{
+  width: 22px; height: 22px;
+  color: var(--accent);
+  opacity: .9;
+  transition: transform .2s ease, opacity .2s ease, filter .2s ease;
+}
+
+/* Badge/contorno detrás del icono */
+.tech__badge{
+  position: absolute;
+  inset: 0;
+  margin: 4px;                     /* grosor del contorno */
+  border: 1.5px solid var(--accent);
+  opacity: .9;
+  filter: drop-shadow(0 0 10px rgba(179,195,0,.25));
+}
+
+/* Formas de badge */
+.tech.hex   .tech__badge{ clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%); }
+.tech.diamond .tech__badge{ transform: rotate(45deg); border-radius: 8px; }
+.tech.circle  .tech__badge{ border-radius: 999px; }
+
+/* Hover sutil (no chillón) */
+.tech:hover svg{ transform: translateY(-2px) scale(1.03); opacity: 1; filter: drop-shadow(0 0 6px rgba(179,195,0,.25)); }
+
+/* En pantallas pequeñas apretamos un poco el gap */
+@media (max-width: 520px){
+  .tech-belt{ gap: 12px; }
+  .tech{ width: 36px; height: 36px; }
+  .tech svg{ width: 20px; height: 20px; }
+}
