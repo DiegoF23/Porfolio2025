@@ -9,8 +9,8 @@ export default function Contact(){
   const MAILTO_URL   = `mailto:${EMAIL}?subject=${encodeURIComponent("Contacto desde tu portfolio")}&body=${encodeURIComponent("Hola Diego, te escribo desde tu portfolio.")}`;
 
   // TODO: pega tus URLs reales
-  const GITHUB_URL   = "https://github.com/tu-usuario";
-  const LINKEDIN_URL = "https://www.linkedin.com/in/tu-usuario/";
+  const GITHUB_URL   = "https://github.com/DiegoF23";
+  const LINKEDIN_URL = "https://www.linkedin.com/in/diego-flores-7b433076/";
 
   return (
     <section id="contact" className="section contact">
