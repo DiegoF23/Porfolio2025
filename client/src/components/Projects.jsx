@@ -34,7 +34,7 @@ import vetmenu from "../assets/ProyetosIMG/Veterinaria/Menu.png";
 import vetTurnos from "../assets/ProyetosIMG/Veterinaria/Turnos.png";
 import vetPacientes from "../assets/ProyetosIMG/Veterinaria/Pacientes.png"; 
 import vetProductos from "../assets/ProyetosIMG/Veterinaria/Productos.png";
-import vetProveedores from "../assets/ProyetosIMG/Veterinaria/Proveedores.png";
+import vetProveedores from "../assets/ProyetosIMG/Veterinaria/proveedores.png";
 
 //electorApp v1
 import electinicio from "../assets/ProyetosIMG/SisElectv1/inicio.png";
@@ -59,8 +59,8 @@ import minReportes from "../assets/ProyetosIMG/minInterior/transmVivo.png";
 //Distribuidora de bebidas
 import disMenu from "../assets/ProyetosIMG/Distribuidor/menu.png";
 import disLotes from "../assets/ProyetosIMG/Distribuidor/lsitadoLotes.png";
-import disStock from "../assets/ProyetosIMG/Distribuidor/Stock.png";
-import disProveedores from "../assets/ProyetosIMG/Distribuidor/Proveedores.png";
+import disStock from "../assets/ProyetosIMG/Distribuidor/stock.png";
+import disProveedores from "../assets/ProyetosIMG/Distribuidor/proveedores.png";
 import disCrLot from "../assets/ProyetosIMG/Distribuidor/crearLote.png";
 
 //tiendaOnline
@@ -78,8 +78,8 @@ import electv2vot from "../assets/ProyetosIMG/sisEcectv2/votantes.png";
 
 // aulaInt
 
-import apagarLuces from "../assets/ProyetosIMG/AulaInt/apagarLuces.png";
-import encenderLuces from "../assets/ProyetosIMG/AulaInt/encenderLuces.png";
+import apagarLuces from "../assets/ProyetosIMG/AulaInt/ApagarLuces.png";
+import encenderLuces from "../assets/ProyetosIMG/AulaInt/EncenderLuces.png";
 import demo from "../assets/ProyetosIMG/AulaInt/demo.mp4";
 
 /* ====== DEMO DATA (4 proyectos diversos) ====== */
