@@ -143,67 +143,108 @@
     rgba(11,11,11,1.00) 100%);
 }
 
-/* ===========================
-   Carrusel de iconos
-   =========================== */
+/* =========================
+   CARRUSEL DE ICONOS (clean)
+   ========================= */
+
+/* Contenedor centrado; en desktop puede superponerse levemente */
 .hero__icons{
   grid-area: icons;
   position: relative;
   z-index: 6;
   width: 100%;
-  display: grid; place-items: center;
+  display: grid;
+  place-items: center;
   margin-top: 14px;
 }
 @media (min-width:900px){
   .hero__icons{ grid-column: 1 / -1; margin-top: -20px; }
 }
 
+/* Tamaños “visibles 6–7” y animación */
 :root{
-  --tech-size: 52px;
-  --tech-icon: 28px;
-  --tech-gap: 18px;
-  --belt-width: 760px;
-  --scroll-speed: 28s;
+  --belt-width: 760px;   /* ancho máximo de la banda */
+  --icon-size: 34px;     /* tamaño del glifo */
+  --gap: 22px;           /* separación entre iconos */
+  --speed: 26s;          /* velocidad del scroll */
 }
+
 @media (max-width: 900px){
-  :root{ --belt-width: 100%; --tech-size: 48px; --tech-icon: 26px; --tech-gap: 16px; --scroll-speed: 24s; }
+  :root{
+    --belt-width: 100%;
+    --icon-size: 30px;
+    --gap: 18px;
+    --speed: 22s;
+  }
 }
 
 .marquee{
   width: 100%;
   max-width: var(--belt-width);
   overflow: hidden;
+  /* desvanecido a los lados para elegancia */
   -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
           mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
-  contain: paint; /* evita que la animación afecte el scroll */
+  contain: paint;
 }
+
 .track{
-  display:flex; align-items:center; gap:var(--tech-gap);
-  width:max-content;
-  animation: scroll var(--scroll-speed) linear infinite;
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  width: max-content;
+  animation: scroll var(--speed) linear infinite;
 }
 .track:hover{ animation-play-state: paused; }
-@keyframes scroll{ from{ transform: translateX(0); } to{ transform: translateX(-50%); } }
 
-.tech{ position:relative; width:var(--tech-size); height:var(--tech-size); display:grid; place-items:center; }
-.tech svg{ width:var(--tech-icon); height:var(--tech-icon); color:var(--accent); opacity:.95; transition:transform .2s, filter .2s, opacity .2s; }
-.tech__badge{ position:absolute; inset:0; margin:5px; border:1.6px solid var(--accent); opacity:.95; filter:drop-shadow(0 0 10px rgba(179,195,0,.25)); }
-.tech.hex   .tech__badge{ clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%); }
-.tech.diamond .tech__badge{ transform: rotate(45deg); border-radius: 8px; }
-.tech.circle  .tech__badge{ border-radius: 999px; }
-.tech::after{
-  content: attr(data-label);
-  position:absolute; left:50%; top:calc(100% + 10px); transform:translateX(-50%);
-  background: rgba(255,255,255,0.06); border:1px solid var(--border);
-  padding:4px 8px; border-radius:8px; font-size:12px; color:var(--text-dim);
-  white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .15s, transform .15s;
+@keyframes scroll{
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
-.tech:hover::after{ opacity:1; transform:translateX(-50%) translateY(-2px); }
-.tech:hover svg{ transform: translateY(-2px) scale(1.05); filter: drop-shadow(0 0 8px rgba(179,195,0,.28)); }
 
-/* Desktop: desplazar la foto ~40px hacia la izquierda */
-@media (min-width: 900px){
-  .hero__photo{
-    transform: translateX(-100px);   /* ajusta a -32px / -48px si lo querés fino */
-  }
+/* ── Íconos “limpios”: sin badge, sólo el glifo ── */
+.track--icons .i{
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: calc(var(--icon-size) + 12px);
+  height: calc(var(--icon-size) + 12px);
+  color: var(--accent);
+}
+
+/* glifo */
+.track--icons .i > svg{
+  width: var(--icon-size);
+  height: var(--icon-size);
+  opacity: .92;
+  transition: transform .18s ease, filter .18s ease, opacity .18s ease;
+}
+
+/* tooltip accesible */
+.track--icons .i::after{
+  content: attr(data-label);
+  position: absolute;
+  left: 50%; top: calc(100% + 10px);
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--text-dim);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+/* hover: pausa, glow sutil y muestra tooltip */
+.track--icons .i:hover > svg{
+  transform: translateY(-2px) scale(1.08);
+  filter: drop-shadow(0 0 10px rgba(179,195,0,.28));
+  opacity: 1;
+}
+.track--icons .i:hover::after{
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
 }

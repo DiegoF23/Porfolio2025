@@ -1,0 +1,52 @@
+/* ===== About – texto ===== */
+.about__text{
+  margin-top: 10px;
+  max-width: 60ch;
+}
+
+/* ===== CTA animado ===== */
+.about-cta{
+  margin-top: 22px;
+}
+
+.about-cta__title{
+  margin: 0;
+  font-weight: 800;
+  line-height: 1;
+  /* tamaño proporcional al contenedor de la sección */
+  font-size: clamp(22px, 5.4cqw, 36px);
+  /* degradado crema/acento como título hero */
+  background: linear-gradient(180deg, var(--text) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: .3px;
+}
+
+/* code-like con typewriter */
+.about-cta__code{
+  margin: 6px 0 0 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-weight: 700;
+  font-size: clamp(18px, 4.6cqw, 28px);
+  color: var(--accent);
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  /* efecto typewriter: ajusta 22ch si cambias el texto */
+  width: 22ch;
+  border-right: 2px solid rgba(179,195,0,.8);
+  animation: typing 2.6s steps(22) 0.3s 1 normal both, caret 850ms steps(1) infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to   { width: 22ch; }
+}
+@keyframes caret {
+  50% { border-right-color: transparent; }
+}
+
+/* compact helpers (cuando va dentro del grid combinado) */
+.about.compact .about__text{ max-width: 60ch; }

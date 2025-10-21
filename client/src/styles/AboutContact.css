@@ -1,0 +1,206 @@
+/* ============== About + Contact (compartido) ============== */
+.about-contact {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 28px;
+  align-items: start;
+  margin-top: 18px;
+  overflow: hidden; /* evita scroll horiz en móviles */
+}
+@media (max-width: 900px){
+  .about-contact { grid-template-columns: 1fr; gap: 22px; }
+}
+
+/* Títulos (más cuerpo) */
+.about .kicker, .contact .kicker {
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 800;
+  font-size: clamp(14px, 2.2vw, 18px);
+}
+.about h2.section-title, .contact h2.section-title{
+  margin: 8px 0 12px;
+  font-weight: 800;
+  color: var(--text);
+  font-size: clamp(24px, 3.2vw, 30px);
+}
+
+/* ===== About (columna izquierda) ===== */
+.about p {
+  color: var(--text);
+  opacity: .95;
+}
+
+/* CTA estilo "editor" + animación loop */
+.cta-code {
+  margin-top: 26px;
+}
+.cta-q {
+  margin: 0 0 6px;
+  font-weight: 900;
+  color: var(--text);
+  font-size: clamp(22px, 3.4vw, 36px);
+}
+.code-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.035);
+  border-radius: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Fira Code", Consolas, "Liberation Mono", monospace;
+  font-weight: 700;
+  font-size: clamp(18px, 2.8vw, 28px);
+  line-height: 1.1;
+  position: relative;
+  overflow: hidden;          /* evita solapes */
+  white-space: nowrap;
+}
+
+/* Coloreado tipo VSCode */
+.code-punc  { color: #9CDCFE; }   /* { } : */
+.code-key   { color: #569CD6; }   /* Trabajemos */
+.code-str   { color: #CE9178; }   /* 'juntos!' */
+
+/* Typewriter sin solapes (usa clip-path) */
+.code-text {
+  display: inline-block;
+  will-change: clip-path;
+  animation: typeLoop 2s steps(24, end) infinite; /* +1 de velocidad */
+}
+@keyframes typeLoop {
+  0%   { clip-path: inset(0 100% 0 0); }
+  40%  { clip-path: inset(0 0    0 0); }
+  60%  { clip-path: inset(0 0    0 0); }
+  100% { clip-path: inset(0 100% 0 0); }
+}
+.cursor {
+  margin-left: 6px;
+  color: var(--accent);
+  animation: blink 1s steps(2, start) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ===== Contact (columna derecha) ===== */
+.contact-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.contact__line, .contact__social {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.contact__link, .contact__social-link {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.04);
+  color: var(--text);
+}
+.contact__link:hover, .contact__social-link:hover {
+  background: rgba(255,255,255,.08);
+}
+.contact__icon, .contact__social-link svg { width: 18px; height: 18px; }
+
+/* Mapa (zona aproximada) */
+.map {
+  margin-top: 14px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  aspect-ratio: 16/10;
+}
+.map iframe {
+  width: 100%; height: 100%; border: 0;
+}
+
+/* ===== Footer ===== */
+.site-footer {
+  margin-top: 50px;
+  padding: 18px 0 30px;
+  text-align: center;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+
+/* Cuando About/Contact van dentro del wrapper, quita el padding extra */
+.about-contact > .about.section,
+.about-contact > .contact.section {
+  padding: 0; /* evita “doble” espacio vertical */
+}
+
+/* Reduce el tamaño del mapa (antes quedaba enorme) */
+.map {
+  /* en desktop ~180–260px alto, responsive */
+  height: clamp(180px, 22vw, 260px);
+  aspect-ratio: auto;      /* el alto manda */
+}
+
+/* En móviles, un poco más compacto aún si querés */
+@media (max-width: 900px){
+  .map { height: clamp(160px, 34vw, 220px); }
+}
+
+/* ===== Code card (estilo VS Code) ===== */
+.about-code{
+  padding: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+}
+
+/* Tira superior tipo ventana */
+.about-code__header{
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,.04);
+  border-bottom: 1px solid var(--border);
+}
+.about-code__header .dot{
+  width: 10px; height: 10px; border-radius: 999px; display: inline-block;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.25) inset;
+}
+.about-code__header .red{ background: #ff5f56; }
+.about-code__header .yellow{ background: #ffbd2e; }
+.about-code__header .green{ background: #27c93f; }
+.about-code__header .file{
+  margin-left: auto; font-size: 12px; color: var(--muted);
+}
+
+/* Cuerpo del “código” */
+.about-code__body{
+  margin: 0; padding: 16px 18px 18px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: clamp(12px, 1.7vw, 14px);
+  line-height: 1.55;
+  color: #d4d4d4;                 /* default VS Code */
+  white-space: pre-wrap;
+  tab-size: 2;
+}
+
+/* Colores de sintaxis tipo VS Code Dark+ */
+.kw  { color: #569CD6; }          /* const, etc */
+.id  { color: #9CDCFE; }          /* identifiers */
+.key { color: #4FC1FF; }          /* object keys */
+.op  { color: #D4D4D4; }          /* punctuation/operators */
+.p   { color: #D4D4D4; }          /* braces */
+.arr { color: #C586C0; }          /* brackets nuance */
+.str { color: #CE9178; }          /* strings */
+.num { color: #B5CEA8; }          /* numbers */
+
+/* Accesibilidad: foco visible en el bloque */
+.about-code__body:focus{
+  outline: 2px dashed var(--accent);
+  outline-offset: 4px;
+}

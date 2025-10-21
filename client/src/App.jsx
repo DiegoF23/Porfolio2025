@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Nav from './components/Nav.jsx';
 import Hero from './components/Hero.jsx';
-import About from './components/About.jsx';
 import Projects from './components/Projects.jsx';
-import Contact from './components/Contact.jsx';
-
+import AboutContact from './components/AboutContact.jsx'; // 👈 nuevo
+import Footer from './components/Footer.jsx';
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 
 export default function App() {
@@ -26,10 +25,12 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
-        <About />
         <Projects items={projects} />
-        <Contact />
+        {/* 👇 About + Contact lado a lado en desktop / apilados en mobile */}
+        <AboutContact />
+        <Footer />
       </main>
+      
     </>
   );
 }
