@@ -4,7 +4,7 @@ import "../styles/Projects.css";
 /* ICONOS: usamos familias que ya tenés en el proyecto */
 import { FaGithub, FaLock, FaHtml5, FaCss3Alt, FaReact, FaNodeJs, FaAngular, FaPython, FaGitAlt } from "react-icons/fa";
 import { IoLogoJavascript } from "react-icons/io5";
-import { SiExpress, SiDotnet, SiMysql, SiLeaflet,SiOpencv } from "react-icons/si";
+import { SiExpress, SiDotnet, SiMysql, SiLeaflet,SiOpencv,SiMercadopago,SiGooglemaps } from "react-icons/si";
 import { DiMsqlServer, DiMysql, DiScrum } from "react-icons/di";
 import { TbBrandCSharp } from "react-icons/tb";
 import { VscAzure } from "react-icons/vsc";
@@ -105,7 +105,7 @@ const FALLBACK = [
       mony13,
       mony14
     ],
-    tech: ["html", "css", "js","react","leaflet", "node", "express", "mysql", "git","Hostinger"],
+    tech: ["html", "css", "js","react","leaflet", "node", "express", "mysql", "git","MercadoPago","googlemaps","Hostinger"],
     github: null, // privado
   },
   {
@@ -238,6 +238,8 @@ const TECH_MAP = {
   azure:   { label: "Azure",       Icon: VscAzure  },
   Hostinger:   { label: "VPS Hostinger",       Icon: SiGooglecloudstorage  },
   opencv :  { label: "OpenCV",      Icon: SiOpencv  },
+  MercadoPago :  { label: "Mercado Pago",      Icon: SiMercadopago  },
+  googlemaps :  { label: "Google Maps",      Icon: SiGooglemaps  },
 };
 
 /* ====== Componente: Carrusel (por tarjeta) ====== */

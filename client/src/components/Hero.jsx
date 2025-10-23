@@ -4,7 +4,7 @@ import '../styles/Hero.css';
 /* Icons */
 import { FaHtml5, FaCss3Alt, FaPython, FaNodeJs, FaReact, FaGitAlt } from "react-icons/fa";
 import { IoLogoJavascript } from "react-icons/io5";
-import { SiExpress, SiLeaflet, SiOpencv, SiTypescript, SiDotnet, SiAngular } from "react-icons/si";
+import { SiExpress, SiLeaflet, SiOpencv, SiTypescript, SiDotnet, SiAngular,SiMercadopago,SiGooglemaps   } from "react-icons/si";
 import { DiMsqlServer, DiMysql, DiScrum } from "react-icons/di";
 import { TbBrandCSharp } from "react-icons/tb"; // ✅ reemplazo de C#
 
@@ -27,6 +27,9 @@ export default function Hero() {
     { id: 'mysql',    label: 'MySQL',      Icon: DiMysql },
     { id: 'git',      label: 'Git',        Icon: FaGitAlt },
     { id: 'scrum',    label: 'SCRUM',      Icon: DiScrum },
+    { id: 'mercadopago', label: 'Mercado Pago', Icon: SiMercadopago },
+    { id: 'googlemaps', label: 'Google Maps', Icon: SiGooglemaps },
+
   ];
   const LOOP = [...TECHS, ...TECHS];
 

@@ -245,3 +245,39 @@
 
 .lightbox__media { max-width: 88vw; max-height: 80vh; object-fit: contain; }
 
+/* ==== MOBILE: mover tech pills debajo de la imagen ==== */
+@media (max-width: 700px){
+  /* el card se vuelve grid para poder reordenar */
+  .project-card{
+    display: grid;
+    grid-auto-flow: row;
+  }
+
+  /* la caja de tecno deja de ser absoluta y pasa al flujo normal */
+  .project__tech{
+    position: static;          /* quita overlay */
+    order: 2;                  /* aparece después de la imagen */
+    margin: 10px 0 4px;
+    padding: 0;                /* sin padding extra */
+  }
+  .project__tech::before{      /* quitamos el fondo glass */
+    display: none;
+  }
+
+  /* compactamos un poco los pills para que no “pesen” visualmente */
+  .tech-pill{
+    width: 26px;
+    height: 26px;
+    border-radius: 9px;
+    background: rgba(12,12,12,.55);
+  }
+  .tech-pill svg{
+    width: 15px;
+    height: 15px;
+  }
+
+  /* damos un respiro visual entre imagen y pills */
+  .project__img{
+    margin-bottom: 6px;
+  }
+}

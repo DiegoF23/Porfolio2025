@@ -1,6 +1,8 @@
 import React from "react";
 import "../styles/AboutContact.css";
 import { FaWhatsapp, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+import { CiInstagram } from "react-icons/ci";
+
 
 export default function Contact(){
   const EMAIL = "dfcaffeprog@gmail.com";
@@ -11,13 +13,25 @@ export default function Contact(){
   // TODO: pega tus URLs reales
   const GITHUB_URL   = "https://github.com/DiegoF23";
   const LINKEDIN_URL = "https://www.linkedin.com/in/diego-flores-7b433076/";
-
+  const INSTAGRAM_URL= "https://www.instagram.com/diegofloresdev/?igsh=MWtybW9scmoycWZ1aw%3D%3D#"
   return (
     <section id="contact" className="section contact">
       <div className="kicker">CONTACTO</div>
       <h2 className="section-title"></h2>
       <div className="contact-card">
         <div className="contact__grid">
+          
+          <div className="contact__social">
+            <a className="contact__social-link" href={GITHUB_URL} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <FaGithub /><span>GitHub</span>
+            </a>
+            <a className="contact__social-link" href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <CiInstagram  /><span> Instagram</span>
+            </a>
+            <a className="contact__social-link" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <FaLinkedin /><span>LinkedIn</span>
+            </a>
+          </div>
           <div className="contact__line">
             <a className="contact__link" href={MAILTO_URL} aria-label={`Enviar email a ${EMAIL}`}>
               <FaEnvelope className="contact__icon" aria-hidden="true" />
@@ -29,15 +43,6 @@ export default function Contact(){
             <a className="contact__link" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="Enviar WhatsApp">
               <FaWhatsapp className="contact__icon" aria-hidden="true" />
               <span>+{PHONE_E164}</span>
-            </a>
-          </div>
-
-          <div className="contact__social">
-            <a className="contact__social-link" href={GITHUB_URL} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <FaGithub /><span>GitHub</span>
-            </a>
-            <a className="contact__social-link" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <FaLinkedin /><span>LinkedIn</span>
             </a>
           </div>
 
