@@ -1,7 +1,7 @@
 /* ===========================
    HERO – layout consistente
    =========================== */
-.hero{
+.hero {
   position: relative;
   display: grid;
   /* 2 columnas SIEMPRE: copy/photo + iconos debajo */
@@ -10,41 +10,49 @@
     "copy  photo"
     "icons icons";
   gap: 28px;
-  align-items: start;         /* ↔ alinear por ARRIBA en desktop */
-  container-type: inline-size;/* habilita cqw */
-  overflow: clip;             /* evita scroll horizontal por solapes/efeclos */
+  align-items: start; /* ↔ alinear por ARRIBA en desktop */
+  container-type: inline-size; /* habilita cqw */
+  overflow: clip; /* evita scroll horizontal por solapes/efeclos */
 }
-@media (min-width: 1200px){
-  /* En desktop ancho, un poquito más de peso al copy */
-  .hero{
+@media (min-width: 1200px) {
+  /* En desktop ancho, un poquito más de peso al copy y centrado vertical */
+  .hero {
     grid-template-columns: 60% 40%;
     gap: 32px;
+    align-items: center; /* centrado vertical en desktop */
   }
 }
-@media (max-width: 900px){
-  .hero{
+@media (max-width: 900px) {
+  .hero {
     grid-template-columns: 56% 44%;
     gap: 14px;
-    align-items: center;      /* en móvil quedan centrados entre sí */
+    align-items: center; /* en móvil quedan centrados entre sí */
+  }
+}
+@media (max-width: 1200px) and (min-width: 901px) {
+  .hero {
+    align-items: center;
   }
 }
 
-.hero__copy{
+.hero__copy {
   grid-area: copy;
   position: relative;
   z-index: 7;
   /* solapamiento sutil visible (no afecta layout, no crea scroll) */
   transform: translateX(0.8cqw);
 }
-@media (max-width:900px){
-  .hero__copy{ transform: translateX(0.5cqw); }
+@media (max-width: 900px) {
+  .hero__copy {
+    transform: translateX(0.5cqw);
+  }
 }
 
 /* ===========================
    Tipografía (toda en cqw)
    =========================== */
-.hero__kicker{
-  letter-spacing: .18em;
+.hero__kicker {
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent);
   font-weight: 700;
@@ -52,20 +60,20 @@
   margin-bottom: 6px;
 }
 
-.hero__name{
+.hero__name {
   margin: 0;
-  line-height: .9;
+  line-height: 0.9;
   text-transform: uppercase;
   color: var(--text);
 }
-.hero__name-line{
+.hero__name-line {
   display: block;
   font-weight: 800;
   /* más grande en desktop, pero proporcional al contenedor */
   font-size: clamp(42px, 10.6cqw, 140px);
 }
 
-.hero__tagline{
+.hero__tagline {
   margin-top: 14px;
   color: var(--text);
   font-size: clamp(13px, 3.2cqw, 22px);
@@ -73,28 +81,46 @@
 }
 
 /* CTA proporcional */
-.hero__cta{
-  display:flex; gap:12px; flex-wrap:wrap;
+.hero__cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
   margin-top: 14px;
 }
-.btn{
-  display:inline-block;
+.btn {
+  display: inline-block;
   font-size: clamp(12px, 2.4cqw, 16px);
-  padding: calc(.6cqw + .35rem) calc(1.2cqw + .6rem);
-  border-radius:12px; border:1px solid var(--border);
-  background:rgba(255,255,255,.05);
-  transition:.2s ease;
+  padding: calc(0.6cqw + 0.35rem) calc(1.2cqw + 0.6rem);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  transition: 0.2s ease;
 }
-.btn:hover{ background:rgba(255,255,255,.1); }
-.btn--solid{ background: var(--accent); border-color: transparent; color:#e6d7b5; font-weight: 700; }
-.btn--solid:hover{ filter: brightness(1.06); }
-.btn--ghost{ border-color: var(--accent); color: var(--accent); background: rgba(255,255,255,.04); }
-.btn--ghost:hover{ background: rgba(255,255,255,.08); }
+.btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.btn--solid {
+  background: var(--accent);
+  border-color: transparent;
+  color: #e6d7b5;
+  font-weight: 700;
+}
+.btn--solid:hover {
+  filter: brightness(1.06);
+}
+.btn--ghost {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.04);
+}
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
 
 /* ===========================
    Foto: proporcional + feather
    =========================== */
-.hero__photo{
+.hero__photo {
   grid-area: photo;
   justify-self: start;
   position: relative;
@@ -104,43 +130,75 @@
   width: clamp(300px, 46cqw, 680px);
   --feather-x: 9%;
 }
-@media (max-width:900px){
-  .hero__photo{ width: clamp(240px, 44cqw, 560px); --feather-x: 12%; }
+@media (max-width: 900px) {
+  .hero__photo {
+    width: clamp(240px, 44cqw, 560px);
+    --feather-x: 12%;
+  }
 }
-@media (min-width:1400px){
-  .hero__photo{ --feather-x: 8%; }
+@media (min-width: 1400px) {
+  .hero__photo {
+    --feather-x: 8%;
+  }
 }
 
-.photo-full{
-  display:block; width:100%; height:auto; object-fit:contain; object-position:center;
-  border:0; border-radius:0; box-shadow:none; background:transparent;
+.photo-full {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
   /* pluma lateral: se funde con el fondo */
-  -webkit-mask-image: linear-gradient(to right,
-    rgba(0,0,0,0) 0%,
-    rgba(0,0,0,1) var(--feather-x),
-    rgba(0,0,0,1) calc(100% - var(--feather-x)),
-    rgba(0,0,0,0) 100%);
-          mask-image: linear-gradient(to right,
-    rgba(0,0,0,0) 0%,
-    rgba(0,0,0,1) var(--feather-x),
-    rgba(0,0,0,1) calc(100% - var(--feather-x)),
-    rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) var(--feather-x),
+    rgba(0, 0, 0, 1) calc(100% - var(--feather-x)),
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) var(--feather-x),
+    rgba(0, 0, 0, 1) calc(100% - var(--feather-x)),
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 /* mini fade superior + fade inferior largo */
-.hero__photo::before{
-  content:""; position:absolute; left:0; right:0; top:0; height:2%;
-  z-index:3; pointer-events:none;
-  background: linear-gradient(to bottom, rgba(11,11,11,1) 0%, rgba(11,11,11,0) 100%);
-}
-.fade-bottom{
-  position:absolute; left:0; right:0; bottom:0; height:22%;
-  z-index:3; pointer-events:none;
+.hero__photo::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2%;
+  z-index: 3;
+  pointer-events: none;
   background: linear-gradient(
     to bottom,
-    rgba(11,11,11,0.00) 0%,
-    rgba(11,11,11,0.22) 32%,
-    rgba(11,11,11,0.60) 72%,
-    rgba(11,11,11,1.00) 100%);
+    rgba(11, 11, 11, 1) 0%,
+    rgba(11, 11, 11, 0) 100%
+  );
+}
+.fade-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 22%;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(11, 11, 11, 0) 0%,
+    rgba(11, 11, 11, 0.22) 32%,
+    rgba(11, 11, 11, 0.6) 72%,
+    rgba(11, 11, 11, 1) 100%
+  );
 }
 
 /* =========================
@@ -148,7 +206,7 @@
    ========================= */
 
 /* Contenedor centrado; en desktop puede superponerse levemente */
-.hero__icons{
+.hero__icons {
   grid-area: icons;
   position: relative;
   z-index: 6;
@@ -157,20 +215,23 @@
   place-items: center;
   margin-top: 14px;
 }
-@media (min-width:900px){
-  .hero__icons{ grid-column: 1 / -1; margin-top: -20px; }
+@media (min-width: 900px) {
+  .hero__icons {
+    grid-column: 1 / -1;
+    margin-top: -20px;
+  }
 }
 
 /* Tamaños “visibles 6–7” y animación */
-:root{
-  --belt-width: 760px;   /* ancho máximo de la banda */
-  --icon-size: 34px;     /* tamaño del glifo */
-  --gap: 22px;           /* separación entre iconos */
-  --speed: 26s;          /* velocidad del scroll */
+:root {
+  --belt-width: 760px; /* ancho máximo de la banda */
+  --icon-size: 34px; /* tamaño del glifo */
+  --gap: 22px; /* separación entre iconos */
+  --speed: 26s; /* velocidad del scroll */
 }
 
-@media (max-width: 900px){
-  :root{
+@media (max-width: 900px) {
+  :root {
     --belt-width: 100%;
     --icon-size: 30px;
     --gap: 18px;
@@ -178,32 +239,50 @@
   }
 }
 
-.marquee{
+.marquee {
   width: 100%;
   max-width: var(--belt-width);
   overflow: hidden;
   /* desvanecido a los lados para elegancia */
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
-          mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
   contain: paint;
 }
 
-.track{
+.track {
   display: flex;
   align-items: center;
   gap: var(--gap);
   width: max-content;
   animation: scroll var(--speed) linear infinite;
 }
-.track:hover{ animation-play-state: paused; }
+.track:hover {
+  animation-play-state: paused;
+}
 
-@keyframes scroll{
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* ── Íconos “limpios”: sin badge, sólo el glifo ── */
-.track--icons .i{
+.track--icons .i {
   position: relative;
   display: grid;
   place-items: center;
@@ -213,20 +292,21 @@
 }
 
 /* glifo */
-.track--icons .i > svg{
+.track--icons .i > svg {
   width: var(--icon-size);
   height: var(--icon-size);
-  opacity: .92;
-  transition: transform .18s ease, filter .18s ease, opacity .18s ease;
+  opacity: 0.92;
+  transition: transform 0.18s ease, filter 0.18s ease, opacity 0.18s ease;
 }
 
 /* tooltip accesible */
-.track--icons .i::after{
+.track--icons .i::after {
   content: attr(data-label);
   position: absolute;
-  left: 50%; top: calc(100% + 10px);
+  left: 50%;
+  top: calc(100% + 10px);
   transform: translateX(-50%);
-  background: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--border);
   padding: 4px 8px;
   border-radius: 8px;
@@ -235,16 +315,16 @@
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .15s ease, transform .15s ease;
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
 /* hover: pausa, glow sutil y muestra tooltip */
-.track--icons .i:hover > svg{
+.track--icons .i:hover > svg {
   transform: translateY(-2px) scale(1.08);
-  filter: drop-shadow(0 0 10px rgba(179,195,0,.28));
+  filter: drop-shadow(0 0 10px rgba(179, 195, 0, 0.28));
   opacity: 1;
 }
-.track--icons .i:hover::after{
+.track--icons .i:hover::after {
   opacity: 1;
   transform: translateX(-50%) translateY(-2px);
 }
