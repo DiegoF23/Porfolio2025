@@ -4,12 +4,16 @@ import Hero from './components/Hero.jsx';
 import Projects from './components/Projects.jsx';
 import AboutContact from './components/AboutContact.jsx'; // 👈 nuevo
 import Footer from './components/Footer.jsx';
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+
+const DEV_API_URL = 'http://localhost:4000';
+const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? DEV_API_URL : '');
+const SHOULD_FETCH = Boolean(API_URL);
 
 export default function App() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
+    if (!SHOULD_FETCH) return;
     let cancelled = false;
     const timer = setTimeout(() => { if (!cancelled) setProjects([]); }, 2000);
     fetch(`${API_URL}/api/projects`)
