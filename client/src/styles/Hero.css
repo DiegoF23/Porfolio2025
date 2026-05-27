@@ -75,8 +75,8 @@
 }
 @media (max-width: 900px) {
   .hero {
-    grid-template-columns: 55% 45%;
-    gap: 12px;
+    grid-template-columns: 58% 42%;
+    gap: 10px;
     align-items: center;
   }
 
@@ -105,11 +105,14 @@
   .hero__cta {
     max-width: 100%;
     gap: 8px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .hero__cta .btn {
     font-size: clamp(11px, 2.8vw, 14px);
     padding: 0.55rem 0.75rem;
+    width: fit-content;
   }
 }
 @media (max-width: 1200px) and (min-width: 901px) {
@@ -319,18 +322,18 @@
 
 @media (max-width: 720px) {
   .hero {
-    grid-template-columns: 52% 48%;
+    grid-template-columns: 55% 45%;
     grid-template-rows: auto auto;
     grid-template-areas:
       "copy  photo"
       "icons icons";
     min-height: calc(100svh - var(--nav-h));
     align-content: center;
-    gap: 6px;
-    row-gap: clamp(20px, 5vh, 36px);
+    gap: 8px;
+    row-gap: clamp(16px, 4vh, 28px);
     text-align: left;
-    padding-top: clamp(20px, 3.5vh, 36px);
-    padding-bottom: clamp(44px, 8vh, 68px);
+    padding-top: clamp(16px, 3vh, 28px);
+    padding-bottom: clamp(32px, 6vh, 52px);
   }
 
   .hero__copy {
@@ -338,39 +341,43 @@
   }
 
   .hero__kicker {
-    font-size: clamp(10px, 3vw, 14px);
-    margin-bottom: 3px;
+    font-size: clamp(10px, 2.8vw, 14px);
+    margin-bottom: 2px;
   }
 
   .hero__name-line {
-    font-size: clamp(28px, 8vw, 48px);
+    font-size: clamp(26px, 7.5vw, 44px);
   }
 
   .hero__tagline {
-    font-size: clamp(11px, 2.8vw, 14px);
-    margin-top: 8px;
+    font-size: clamp(11px, 2.6vw, 14px);
+    margin-top: 6px;
     max-width: 100%;
+    line-height: 1.35;
   }
 
   .hero__cta {
     max-width: 100%;
     gap: 6px;
-    margin-top: 10px;
+    margin-top: 8px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .hero__cta .btn {
-    font-size: clamp(10px, 2.6vw, 13px);
-    padding: 0.5rem 0.65rem;
+    font-size: clamp(10px, 2.5vw, 13px);
+    padding: 0.48rem 0.7rem;
+    width: fit-content;
   }
 
   .hero__photo-wrapper {
-    width: clamp(120px, 40cqw, 220px);
+    width: clamp(130px, 42cqw, 240px);
     transform: none;
   }
 
   .hero__icons {
     grid-column: 1 / -1;
-    align-self: center;
+    align-self: end;
     padding-bottom: 0;
   }
 
