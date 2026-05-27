@@ -1,10 +1,15 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useLanguage } from "../../context/LanguageContext";
+
+const SLIDE_MS = 550;
 
 export default function Carousel({ images = [], auto = true, interval = 3500, onOpen }) {
   const [index, setIndex] = useState(0);
-  const timerRef = useRef(null);
-  const videoTimeoutRef = useRef(null);
+  const indexRef = useRef(0);
+  const animatingRef = useRef(false);
+  const autoTimerRef = useRef(null);
+  const videoTimerRef = useRef(null);
+  const animTimerRef = useRef(null);
   const { t } = useLanguage();
 
   const slides = (images || []).map((it) =>
@@ -14,32 +19,55 @@ export default function Carousel({ images = [], auto = true, interval = 3500, on
 
   const isVideo = (i) => slides[i]?.type === "video";
 
-  const clearAll = () => {
-    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
-    if (videoTimeoutRef.current) { clearTimeout(videoTimeoutRef.current); videoTimeoutRef.current = null; }
-  };
+  // Only clears autoplay timers, NOT the animation timeout
+  const clearAutoTimers = useCallback(() => {
+    if (autoTimerRef.current) { clearInterval(autoTimerRef.current); autoTimerRef.current = null; }
+    if (videoTimerRef.current) { clearTimeout(videoTimerRef.current); videoTimerRef.current = null; }
+  }, []);
 
-  const startImageInterval = () => {
-    if (!auto || size <= 1) return;
-    if (isVideo(index)) return;
-    clearAll();
-    timerRef.current = setInterval(() => {
-      setIndex((i) => (i + 1) % size);
-    }, interval);
-  };
+  const goTo = useCallback((target) => {
+    if (animatingRef.current || size <= 1) return;
+    if (target === indexRef.current) return;
 
+    animatingRef.current = true;
+    indexRef.current = target;
+    setIndex(target);
+
+    if (animTimerRef.current) clearTimeout(animTimerRef.current);
+    animTimerRef.current = setTimeout(() => {
+      animatingRef.current = false;
+      animTimerRef.current = null;
+    }, SLIDE_MS);
+  }, [size]);
+
+  const prev = useCallback(() => {
+    goTo(((indexRef.current - 1) % size + size) % size);
+  }, [goTo, size]);
+
+  const next = useCallback(() => {
+    goTo((indexRef.current + 1) % size);
+  }, [goTo, size]);
+
+  // Autoplay interval — uses clearAutoTimers (does NOT kill animation timeout)
   useEffect(() => {
-    startImageInterval();
-    return clearAll;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auto, interval, size, index]);
+    if (!auto || size <= 1) return;
+    if (isVideo(indexRef.current)) return;
 
+    clearAutoTimers();
+    autoTimerRef.current = setInterval(() => {
+      goTo((indexRef.current + 1) % size);
+    }, interval);
+
+    return clearAutoTimers;
+  }, [auto, interval, size, index, clearAutoTimers, goTo]);
+
+  // Video autoplay handling
   useEffect(() => {
     if (!auto || size < 1) return;
 
-    if (videoTimeoutRef.current) {
-      clearTimeout(videoTimeoutRef.current);
-      videoTimeoutRef.current = null;
+    if (videoTimerRef.current) {
+      clearTimeout(videoTimerRef.current);
+      videoTimerRef.current = null;
     }
 
     if (!isVideo(index)) return;
@@ -47,76 +75,97 @@ export default function Carousel({ images = [], auto = true, interval = 3500, on
     const slide = slides[index];
     const ms = Number(slide?.autoplayMs) || 0;
 
-    if (size === 1) {
-      return;
-    }
+    if (size === 1) return;
 
     if (ms > 0) {
-      videoTimeoutRef.current = setTimeout(() => {
-        setIndex((i) => (i + 1) % size);
+      videoTimerRef.current = setTimeout(() => {
+        goTo((indexRef.current + 1) % size);
       }, ms);
-      return () => clearTimeout(videoTimeoutRef.current);
+      return () => { if (videoTimerRef.current) clearTimeout(videoTimerRef.current); };
     }
 
     const el = document.getElementById(`carousel-video-${index}`);
     if (el) {
-      const onEnded = () => setIndex((i) => (i + 1) % size);
+      const onEnded = () => goTo((indexRef.current + 1) % size);
       el.addEventListener("ended", onEnded);
       return () => el.removeEventListener("ended", onEnded);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auto, size, index, slides]);
+  }, [auto, size, index, slides, goTo]);
 
-  const pauseAllTimers = () => clearAll();
-  const resumeIfNeeded = () => startImageInterval();
+  const pauseAll = () => clearAutoTimers();
 
+  const resumeAll = useCallback(() => {
+    if (!auto || size <= 1) return;
+    if (isVideo(indexRef.current)) return;
+    clearAutoTimers();
+    autoTimerRef.current = setInterval(() => {
+      goTo((indexRef.current + 1) % size);
+    }, interval);
+  }, [auto, interval, size, clearAutoTimers, goTo]);
+
+  // Visibility change handling
   useEffect(() => {
     const onVis = () => {
       if (document.hidden) {
-        clearAll();
+        clearAutoTimers();
       } else {
-        startImageInterval();
+        resumeAll();
       }
     };
     document.addEventListener("visibilitychange", onVis);
     return () => document.removeEventListener("visibilitychange", onVis);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index, auto, interval, size]);
+  }, [resumeAll, clearAutoTimers]);
 
-  const go = (i) => setIndex(((i % size) + size) % size);
-  const prev = () => go(index - 1);
-  const next = () => go(index + 1);
+  // Cleanup animation timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (animTimerRef.current) clearTimeout(animTimerRef.current);
+      if (autoTimerRef.current) clearInterval(autoTimerRef.current);
+    };
+  }, []);
 
   if (!size) return null;
 
-  const current = slides[index];
-
   return (
-    <div className="carousel" onMouseEnter={pauseAllTimers} onMouseLeave={resumeIfNeeded}>
+    <div className="carousel" onMouseEnter={pauseAll} onMouseLeave={resumeAll}>
       <div className="carousel__viewport">
-        <div className="carousel__slide" key={index}>
-          {current.type === "video" ? (
-            <video
-              id={`carousel-video-${index}`}
-              className="carousel__media"
-              src={current.src}
-              poster={current.poster}
-              muted
-              playsInline
-              autoPlay
-              controls={false}
-              loop={size === 1 || Boolean(current.loop)}
-              onClick={() => onOpen?.(index)}
-            />
-          ) : (
-            <button
-              className="carousel__imgbtn"
-              onClick={() => onOpen?.(index)}
-              aria-label={`${t.projects.openImage} ${index + 1} ${t.projects.vista} ${size}`}
+        <div
+          className="carousel__track"
+          style={{
+            transform: `translateX(calc(-${index} * 100%))`,
+            transition: `transform ${SLIDE_MS}ms cubic-bezier(0.25, 0.1, 0.0, 1.0)`,
+          }}
+        >
+          {slides.map((slide, i) => (
+            <div
+              className="carousel__slide"
+              key={i}
+              style={{ opacity: i === index ? 1 : 0.35, transition: `opacity ${SLIDE_MS}ms ease` }}
             >
-              <img className="carousel__media" src={current.src} alt={`${t.projects.vista} ${index + 1}`} />
-            </button>
-          )}
+              {slide.type === "video" ? (
+                <video
+                  id={`carousel-video-${i}`}
+                  className="carousel__media"
+                  src={slide.src}
+                  poster={slide.poster}
+                  muted
+                  playsInline
+                  autoPlay={i === index}
+                  controls={false}
+                  loop={size === 1 || Boolean(slide.loop)}
+                  onClick={() => onOpen?.(i)}
+                />
+              ) : (
+                <button
+                  className="carousel__imgbtn"
+                  onClick={() => onOpen?.(i)}
+                  aria-label={`${t.projects.openImage} ${i + 1} ${t.projects.vista} ${size}`}
+                >
+                  <img className="carousel__media" src={slide.src} alt={`${t.projects.vista} ${i + 1}`} />
+                </button>
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
@@ -130,7 +179,7 @@ export default function Carousel({ images = [], auto = true, interval = 3500, on
               <button
                 key={i}
                 className={`dot ${i === index ? "active" : ""}`}
-                onClick={() => go(i)}
+                onClick={() => goTo(i)}
                 aria-label={`${t.projects.goToView} ${i + 1}`}
                 aria-selected={i === index}
                 role="tab"

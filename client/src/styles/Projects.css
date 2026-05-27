@@ -168,13 +168,16 @@
   max-width: 100%;
   height: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 .carousel__track{
   display: flex;
   width: 100%;
   height: 100%;
-  transition: transform .55s cubic-bezier(.2,.8,.2,1);
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .carousel__slide{
@@ -188,12 +191,14 @@
   background: #111;
   cursor: zoom-in;
   position: relative;
+  overflow: hidden;
 }
 .carousel__slide img,
 .carousel__slide video{
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 .carousel__slide video{
@@ -265,9 +270,28 @@
 @media (max-width: 900px){
   .lightbox__content{ inset: 10% 4%; }
 }
-.lightbox__content img{
-  max-width: 100%;
-  max-height: 100%;
+
+.lightbox__track{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.lightbox__slide{
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.lightbox__media{
+  max-width: 88vw;
+  max-height: 80vh;
   object-fit: contain;
 }
 
@@ -346,8 +370,6 @@
   cursor: zoom-in;
 }
 
-.lightbox__media { max-width: 88vw; max-height: 80vh; object-fit: contain; }
-
 /* ==== MOBILE: tech pills debajo de la imagen, orden correcto ==== */
 @media (max-width: 1099px){
   .project-card{
@@ -361,7 +383,7 @@
 
   .project__img{
     order: 0;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16/10;
   }
 
   .project__tech{
