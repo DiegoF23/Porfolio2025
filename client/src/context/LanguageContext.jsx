@@ -143,7 +143,9 @@ export function LanguageProvider({ children }) {
 
   const t = translations[lang];
 
-  const cvFile = lang === "en" ? "/cv-en.pdf" : "/cv.pdf";
+  // Cache-buster to prevent browser from serving stale PDF in viewer
+  const CV_VERSION = "20260527";
+  const cvFile = lang === "en" ? `/cv-en.pdf?v=${CV_VERSION}` : `/cv.pdf?v=${CV_VERSION}`;
 
   return (
     <LanguageContext.Provider value={{ lang, toggleLang, t, cvFile }}>
