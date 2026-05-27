@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">DF developer mark</title>
+  <desc id="desc">A compact code-style DF logo written as &lt;DF/&gt;.</desc>
+  <rect width="160" height="160" rx="34" fill="#0B0B0B"/>
+  <rect x="8" y="8" width="144" height="144" rx="28" fill="none" stroke="#B3C300" stroke-width="6"/>
+  <text
+    x="80"
+    y="93"
+    text-anchor="middle"
+    font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+    font-size="42"
+    font-weight="800"
+    letter-spacing="-3"
+    fill="#E7D7B5"
+  >&lt;DF/&gt;</text>
+</svg>

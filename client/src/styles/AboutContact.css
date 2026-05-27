@@ -1,11 +1,11 @@
 /* ============== About + Contact (compartido) ============== */
 .about-contact {
   display: grid;
-  grid-template-columns: 1.15fr .85fr;
-  gap: 28px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(340px, .8fr);
+  gap: clamp(22px, 3vw, 36px);
   align-items: start;
   margin-top: 18px;
-  overflow: hidden; /* evita scroll horiz en móviles */
+  overflow: visible;
 }
 @media (max-width: 900px){
   .about-contact { grid-template-columns: 1fr; gap: 22px; }
@@ -31,6 +31,9 @@
   color: var(--text);
   opacity: .95;
 }
+.about {
+  min-width: 0;
+}
 
 /* CTA estilo "editor" + animación loop */
 .cta-code {
@@ -48,27 +51,27 @@
   gap: 8px;
   padding: 10px 14px;
   border: 1px solid var(--border);
-  background: rgba(255,255,255,.035);
+  background: var(--code-bg);
   border-radius: 12px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Fira Code", Consolas, "Liberation Mono", monospace;
   font-weight: 700;
   font-size: clamp(18px, 2.8vw, 28px);
   line-height: 1.1;
   position: relative;
-  overflow: hidden;          /* evita solapes */
+  overflow: hidden;
   white-space: nowrap;
 }
 
 /* Coloreado tipo VSCode */
-.code-punc  { color: #9CDCFE; }   /* { } : */
-.code-key   { color: #569CD6; }   /* Trabajemos */
-.code-str   { color: #CE9178; }   /* 'juntos!' */
+.code-punc  { color: #9CDCFE; }
+.code-key   { color: #569CD6; }
+.code-str   { color: #CE9178; }
 
 /* Typewriter sin solapes (usa clip-path) */
 .code-text {
   display: inline-block;
   will-change: clip-path;
-  animation: typeLoop 2s steps(24, end) infinite; /* +1 de velocidad */
+  animation: typeLoop 2s steps(24, end) infinite;
 }
 @keyframes typeLoop {
   0%   { clip-path: inset(0 100% 0 0); }
@@ -85,29 +88,46 @@
 
 /* ===== Contact (columna derecha) ===== */
 .contact-card {
-  background: var(--card);
+  background:
+    radial-gradient(circle at top right, rgba(var(--accent-rgb), .09), transparent 42%),
+    var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 18px;
+  padding: clamp(18px, 2vw, 24px);
+  box-shadow: var(--shadow);
+}
+.contact {
+  align-self: start;
+}
+@media (min-width: 1000px){
+  .contact-card {
+    position: sticky;
+    top: calc(var(--nav-h) + 24px);
+  }
 }
 .contact__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
+  gap: 12px;
 }
 .contact__line, .contact__social {
   display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.contact__social {
+  display: grid;
+  grid-template-columns: 1fr;
 }
 .contact__link, .contact__social-link {
   display: inline-flex; align-items: center; gap: 10px;
   padding: 10px 12px;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: rgba(255,255,255,.04);
+  background: var(--btn-bg);
   color: var(--text);
+  width: 100%;
 }
 .contact__link:hover, .contact__social-link:hover {
-  background: rgba(255,255,255,.08);
+  background: var(--btn-hover);
 }
 .contact__icon, .contact__social-link svg { width: 18px; height: 18px; }
 
@@ -118,6 +138,7 @@
   overflow: hidden;
   border: 1px solid var(--border);
   aspect-ratio: 16/10;
+  opacity: .82;
 }
 .map iframe {
   width: 100%; height: 100%; border: 0;
@@ -132,21 +153,18 @@
   border-top: 1px solid var(--border);
 }
 
-
 /* Cuando About/Contact van dentro del wrapper, quita el padding extra */
 .about-contact > .about.section,
 .about-contact > .contact.section {
-  padding: 0; /* evita “doble” espacio vertical */
+  padding: 0;
 }
 
-/* Reduce el tamaño del mapa (antes quedaba enorme) */
+/* Reduce el tamaño del mapa */
 .map {
-  /* en desktop ~180–260px alto, responsive */
-  height: clamp(180px, 22vw, 260px);
-  aspect-ratio: auto;      /* el alto manda */
+  height: clamp(128px, 13vw, 170px);
+  aspect-ratio: auto;
 }
 
-/* En móviles, un poco más compacto aún si querés */
 @media (max-width: 900px){
   .map { height: clamp(160px, 34vw, 220px); }
 }
@@ -157,14 +175,14 @@
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+  background: linear-gradient(180deg, var(--code-bg), var(--card));
 }
 
 /* Tira superior tipo ventana */
 .about-code__header{
   display: flex; align-items: center; gap: 8px;
   padding: 10px 12px;
-  background: rgba(255,255,255,.04);
+  background: var(--code-header-bg);
   border-bottom: 1px solid var(--border);
 }
 .about-code__header .dot{
@@ -178,26 +196,26 @@
   margin-left: auto; font-size: 12px; color: var(--muted);
 }
 
-/* Cuerpo del “código” */
+/* Cuerpo del "código" */
 .about-code__body{
   margin: 0; padding: 16px 18px 18px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   font-size: clamp(12px, 1.7vw, 14px);
   line-height: 1.55;
-  color: #d4d4d4;                 /* default VS Code */
+  color: #d4d4d4;
   white-space: pre-wrap;
   tab-size: 2;
 }
 
 /* Colores de sintaxis tipo VS Code Dark+ */
-.kw  { color: #569CD6; }          /* const, etc */
-.id  { color: #9CDCFE; }          /* identifiers */
-.key { color: #4FC1FF; }          /* object keys */
-.op  { color: #D4D4D4; }          /* punctuation/operators */
-.p   { color: #D4D4D4; }          /* braces */
-.arr { color: #C586C0; }          /* brackets nuance */
-.str { color: #CE9178; }          /* strings */
-.num { color: #B5CEA8; }          /* numbers */
+.kw  { color: #569CD6; }
+.id  { color: #9CDCFE; }
+.key { color: #4FC1FF; }
+.op  { color: #D4D4D4; }
+.p   { color: #D4D4D4; }
+.arr { color: #C586C0; }
+.str { color: #CE9178; }
+.num { color: #B5CEA8; }
 
 /* Accesibilidad: foco visible en el bloque */
 .about-code__body:focus{

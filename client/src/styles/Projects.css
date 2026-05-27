@@ -1,72 +1,145 @@
-/* ===== Grid general (ya compatible con tu globals) ===== */
+/* ===== Grid general ===== */
+.projects__header{
+  max-width: 680px;
+}
+
+.projects__intro{
+  margin: 8px 0 0;
+  color: var(--text-dim);
+  font-size: clamp(16px, 1.7vw, 20px);
+  line-height: 1.5;
+}
+
 .projects__grid{
   display:grid;
   gap:20px;
   grid-template-columns: 1fr;
+  margin-top: 22px;
 }
 @media (min-width: 900px){
   .projects__grid{ grid-template-columns: repeat(2,1fr); }
+}
+
+@media (max-width: 1099px){
+  #projects{
+    overflow: hidden;
+  }
+
+  #projects .container{
+    max-width: 100%;
+    padding-inline: 14px;
+    overflow: hidden;
+  }
+
+  .projects__grid{
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 1100px){
+  .projects__grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    align-items: stretch;
+  }
+
+  .project-card{
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+
+  .project__actions{
+    margin-top: auto;
+    padding-top: 10px;
+  }
 }
 
 /* ===== Tarjeta ===== */
 .project-card{
   position: relative;
   padding: 16px;
-  overflow: hidden; /* para tech pills y carrusel */
+  overflow: hidden;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
 }
 
 .project__title{
-  margin: 14px 0 6px;
-  font-size: 20px;
+  margin: 12px 0 6px;
+  font-size: clamp(18px, 1.55vw, 22px);
+  line-height: 1.15;
   font-weight: 800;
   color: var(--text);
 }
 
 .project__desc{
   color: var(--text-dim);
-  min-height: 3.2em; /* mantiene altura pareja entre cards con textos cortos */
+  min-height: 3.2em;
 }
 
-/* ===== Tecno pills en esquina ===== */
+/* ===== Tecnologías: franja inferior, con marquee cuando no entran ===== */
 .project__tech{
-  position: absolute;
-  top: 10px; right: 10px;
-  display: flex; gap: 8px; flex-wrap: wrap;
-  z-index: 4;
-  padding: 6px 8px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  margin-top: 8px;
+  padding: 7px;
   border-radius: 14px;
-}
-.project__tech::before{
-  content: "";
-  position: absolute;
-  inset: -6px -8px;               /* margen alrededor de los pills */
-  border-radius: 16px;
-  background: linear-gradient(180deg, rgba(0,0,0,.58), rgba(0,0,0,.42));
+  overflow: hidden;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   backdrop-filter: blur(6px) saturate(120%);
   -webkit-backdrop-filter: blur(6px) saturate(120%);
   box-shadow:
     0 8px 18px rgba(0,0,0,.35),
-    inset 0 0 0 1px rgba(255,255,255,.06);
-  z-index: -1;                    /* queda detrás de los pills */
+    inset 0 0 0 1px var(--glass-border);
+}
+.project__tech-track{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.project__tech--marquee{
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+}
+.project__tech--marquee .project__tech-track{
+  width: max-content;
+  flex-wrap: nowrap;
+  animation: techRail 24s linear infinite;
+}
+.project__tech--marquee:hover .project__tech-track{
+  animation-play-state: paused;
+}
+@keyframes techRail{
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 .tech-pill{
   display:grid; place-items:center;
-  width: 30px; height: 30px;
+  width: 28px; height: 28px;
   border-radius: 10px;
-  background: rgba(12,12,12,.68);             /* más oscuro */
-  border: 1px solid rgba(255,255,255,.16);     /* borde sutil */
+  background: var(--btn-bg);
+  border: 1px solid var(--border);
   color: var(--accent);
   transition: transform .16s ease, background .16s ease, box-shadow .16s ease;
   box-shadow: 0 2px 6px rgba(0,0,0,.35);
 }
 .tech-pill:hover{
   transform: translateY(-2px);
-  background: rgba(12,12,12,.78);
+  background: var(--btn-hover);
   box-shadow: 0 4px 10px rgba(0,0,0,.45);
 }
 .tech-pill svg{
-  width: 17px; height: 17px;
-  filter: drop-shadow(0 1px 0 rgba(0,0,0,.35)); /* realce del ícono */
+  width: 16px; height: 16px;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.35));
 }
 
 /* ===== Carrusel ===== */
@@ -76,17 +149,23 @@
   overflow: hidden;
   border: 1px solid var(--border);
   aspect-ratio: 16/10;
-  background: rgba(255,255,255,.02);
+  background: #111;
+  min-height: 0;
+  width: 100%;
+  max-width: 100%;
 }
 
 .carousel{
   width: 100%;
+  max-width: 100%;
   height: 100%;
-  position: relative;
+  position: absolute;
+  top: 0; left: 0;
 }
 
 .carousel__viewport{
   width: 100%;
+  max-width: 100%;
   height: 100%;
   overflow: hidden;
 }
@@ -99,17 +178,27 @@
 }
 
 .carousel__slide{
-  min-width: 100%;
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   height: 100%;
   border: 0;
   padding: 0;
-  background: transparent;
+  background: #111;
   cursor: zoom-in;
+  position: relative;
 }
-.carousel__slide img{
-  width: 100%; height: 100%;
+.carousel__slide img,
+.carousel__slide video{
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block;
+}
+.carousel__slide video{
+  cursor: pointer;
+  background: #111;
 }
 
 /* Flechas */
@@ -139,12 +228,20 @@
   z-index: 3;
 }
 .dot{
-  width: 8px; height: 8px; border-radius: 999px;
-  background: rgba(255,255,255,.45);
+  width: 24px; height: 24px; border-radius: 999px;
+  display: grid; place-items: center;
+  background: transparent;
   border: 0;
   cursor: pointer;
 }
-.dot.active{ background: var(--accent); }
+.dot::before{
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.45);
+}
+.dot.active::before{ background: var(--accent); }
 
 /* ===== Modal / Lightbox ===== */
 .lightbox{
@@ -159,7 +256,7 @@
 .lightbox__content{
   position: absolute;
   inset: 6% 6%;
-  background: #0b0b0b;
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 12px;
   display: grid; place-items: center;
@@ -178,7 +275,7 @@
   position: absolute; top: 10px; right: 10px;
   width: 36px; height: 36px;
   border-radius: 999px; border: 1px solid var(--border);
-  background: rgba(255,255,255,.06);
+  background: var(--btn-bg);
   color: var(--text);
   cursor: pointer;
 }
@@ -188,7 +285,7 @@
   transform: translateY(-50%);
   width: 42px; height: 42px;
   border-radius: 999px; border: 1px solid var(--border);
-  background: rgba(255,255,255,.06);
+  background: var(--btn-bg);
   color: var(--text);
   cursor: pointer;
 }
@@ -201,10 +298,8 @@
   display: flex; gap: 8px;
 }
 .lightbox__dots .dot{
-  width: 10px; height: 10px;
-  background: rgba(255,255,255,.45);
+  width: 24px; height: 24px;
 }
-.lightbox__dots .dot.active{ background: var(--accent); }
 
 /* ===== Acciones: ver más + repo ===== */
 .project__actions{
@@ -217,9 +312,9 @@
   font-size: 13px;
   border-color: var(--accent);
   color: var(--accent);
-  background: rgba(255,255,255,.04);
+  background: transparent;
 }
-.btn.xs:hover{ background: rgba(255,255,255,.08); }
+.btn.xs:hover{ background: var(--btn-hover); }
 
 .project__repo{
   display: flex; align-items: center; gap: 8px;
@@ -229,55 +324,78 @@
   padding: 6px 10px;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: rgba(255,255,255,.04);
+  background: var(--btn-bg);
   color: var(--text-dim);
 }
 .repo-link:hover{
   color: var(--text);
-  background: rgba(255,255,255,.08);
-  border-color: rgba(255,255,255,.16);
+  background: var(--btn-hover);
+  border-color: var(--border);
 }
 .repo-private{ color: var(--muted); }
 .repo-link svg, .repo-private svg{ width: 16px; height: 16px; }
 
 .carousel__media { width:100%; height:100%; object-fit:cover; display:block; }
-.carousel__imgbtn { display:block; width:100%; height:100%; padding:0; border:0; background:none; }
+.carousel__imgbtn {
+  display:block;
+  width:100%;
+  height:100%;
+  padding:0;
+  border:0;
+  background:none;
+  cursor: zoom-in;
+}
 
 .lightbox__media { max-width: 88vw; max-height: 80vh; object-fit: contain; }
 
-/* ==== MOBILE: mover tech pills debajo de la imagen ==== */
-@media (max-width: 700px){
-  /* el card se vuelve grid para poder reordenar */
+/* ==== MOBILE: tech pills debajo de la imagen, orden correcto ==== */
+@media (max-width: 1099px){
   .project-card{
-    display: grid;
-    grid-auto-flow: row;
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+    width: min(100%, calc(100vw - 28px));
+    max-width: calc(100vw - 28px);
+    margin-inline: auto;
   }
 
-  /* la caja de tecno deja de ser absoluta y pasa al flujo normal */
+  .project__img{
+    order: 0;
+    aspect-ratio: 4 / 3;
+  }
+
   .project__tech{
-    position: static;          /* quita overlay */
-    order: 2;                  /* aparece después de la imagen */
-    margin: 10px 0 4px;
-    padding: 0;                /* sin padding extra */
-  }
-  .project__tech::before{      /* quitamos el fondo glass */
-    display: none;
+    order: 1;
+    margin: 8px 0 4px;
+    min-height: 42px;
+    padding: 7px;
   }
 
-  /* compactamos un poco los pills para que no “pesen” visualmente */
+  .project__title{
+    order: 2;
+    font-size: clamp(17px, 4.2vw, 20px);
+    line-height: 1.2;
+  }
+  .project__desc{
+    order: 3;
+    min-height: auto;
+  }
+  .project__actions{
+    order: 4;
+  }
+
   .tech-pill{
     width: 26px;
     height: 26px;
     border-radius: 9px;
-    background: rgba(12,12,12,.55);
+    background: var(--btn-bg);
   }
   .tech-pill svg{
     width: 15px;
     height: 15px;
   }
 
-  /* damos un respiro visual entre imagen y pills */
   .project__img{
-    margin-bottom: 6px;
+    margin-bottom: 0;
   }
 }

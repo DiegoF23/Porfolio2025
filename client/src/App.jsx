@@ -1,40 +1,35 @@
-import React, { useEffect, useState } from 'react';
 import Nav from './components/Nav.jsx';
 import Hero from './components/Hero.jsx';
 import Projects from './components/Projects.jsx';
-import AboutContact from './components/AboutContact.jsx'; // 👈 nuevo
+import AboutContact from './components/AboutContact.jsx';
 import Footer from './components/Footer.jsx';
+import { ThemeProvider } from './context/ThemeContext';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 
-const DEV_API_URL = 'http://localhost:4000';
-const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? DEV_API_URL : '');
-const SHOULD_FETCH = Boolean(API_URL);
-
-export default function App() {
-  const [projects, setProjects] = useState([]);
-
-  useEffect(() => {
-    if (!SHOULD_FETCH) return;
-    let cancelled = false;
-    const timer = setTimeout(() => { if (!cancelled) setProjects([]); }, 2000);
-    fetch(`${API_URL}/api/projects`)
-      .then(r => (r.ok ? r.json() : Promise.reject()))
-      .then(data => { if (!cancelled) setProjects(Array.isArray(data) ? data : []); })
-      .catch(() => { if (!cancelled) setProjects([]); })
-      .finally(() => clearTimeout(timer));
-    return () => { cancelled = true; clearTimeout(timer); };
-  }, []);
+function AppContent() {
+  const { lang } = useLanguage();
+  const skipLabel = lang === 'es' ? 'Saltar al contenido' : 'Skip to content';
 
   return (
     <>
+      <a className="skip-link" href="#main-content">{skipLabel}</a>
       <Nav />
-      <main>
+      <main id="main-content">
         <Hero />
-        <Projects items={projects} />
-        {/* 👇 About + Contact lado a lado en desktop / apilados en mobile */}
+        <Projects />
         <AboutContact />
         <Footer />
       </main>
-      
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <LanguageProvider>
+        <AppContent />
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }

@@ -1,12 +1,13 @@
-import React from "react";
 import "../styles/AboutContact.css";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function About() {
+  const { t } = useLanguage();
+
   return (
     <section id="about" className="section about">
-      <div className="kicker">SOBRE MÍ</div>
+      <div className="kicker">{t.about.title}</div>
 
-      {/* Bloque estilo “código” */}
       <div className="about-code card" aria-label="Sobre mí en formato código">
         <div className="about-code__header">
           <span className="dot red" />
@@ -33,14 +34,13 @@ export default function About() {
         </pre>
       </div>
 
-      {/* CTA estilizado (tal cual lo tenías) */}
       <div className="cta-code">
-        <h3 className="cta-q">¿En mente algún proyecto?</h3>
-        <div className="code-line" aria-label="Trabajemos juntos">
+        <h3 className="cta-q">{t.about.projectInMind}</h3>
+        <div className="code-line" aria-label={t.about.letsWork}>
           <span className="code-punc">{'{'}</span>
-          <span className="code-key">Trabajemos</span>
+          <span className="code-key">{t.about.letsWork}</span>
           <span className="code-punc">:</span>
-          <span className="code-str code-text">'juntos!'</span>
+          <span className="code-str code-text">{t.about.together}</span>
           <span className="code-punc">{'}'}</span>
           <span className="cursor">▌</span>
         </div>

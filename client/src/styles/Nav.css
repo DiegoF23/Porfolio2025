@@ -1,12 +1,12 @@
 /* ===== Nav: fijo siempre visible ===== */
-:root { --nav-h: 64px; } /* si ya lo tienes en globals, puedes borrar esta línea */
+:root { --nav-h: 64px; }
 
 .nav{
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--nav-h);
   z-index: 2000;
-  background: rgba(11,11,11,.86);
+  background: var(--nav-bg);
   backdrop-filter: saturate(120%) blur(6px);
   border-bottom: 1px solid var(--border);
 }
@@ -15,7 +15,39 @@
   height:100%; padding:0 20px;
 }
 .nav__links{ display:flex; gap:28px; color:var(--accent); font-size:14px; }
-.nav__brand{ font-weight:700; color: var(--text); }
+.nav__brand{
+  display: inline-flex;
+  align-items: center;
+  font-weight:700;
+  color: var(--text);
+}
+.nav__brand-icon{
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  filter: drop-shadow(0 0 12px rgba(var(--accent-rgb), .28));
+}
+
+/* Controles del nav (tema + idioma) */
+.nav__controls{
+  display:flex; gap:8px; align-items:center;
+}
+.nav__toggle{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:6px 12px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:var(--btn-bg);
+  color:var(--text);
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  transition: background .18s ease, transform .15s ease;
+}
+.nav__toggle:hover{
+  background:var(--btn-hover);
+  transform: translateY(-1px);
+}
 
 /* deja espacio al contenido por header fijo */
 main { padding-top: var(--nav-h); }
@@ -30,7 +62,7 @@ main { padding-top: var(--nav-h); }
   display: grid; place-items: center;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: rgba(255,255,255,.05);
+  background: var(--btn-bg);
   color: var(--accent);
   box-shadow: 0 10px 24px rgba(0,0,0,.35);
   cursor: pointer;
@@ -44,9 +76,15 @@ main { padding-top: var(--nav-h); }
   pointer-events: auto;
   transform: translate(-50%, 0) scale(1);
 }
-.to-top:hover{ background: rgba(255,255,255,.10); }
+.to-top:hover{ background: var(--btn-hover); }
 
-/* ===== Scroll suave + compensación anclas =====
-   (lo movemos aquí para aislarlo del resto) */
+/* ===== Scroll suave + compensación anclas ===== */
 html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
 [id] { scroll-margin-top: var(--nav-h); }
+
+/* Responsive: en mobile, compactar controles */
+@media (max-width: 700px){
+  .nav__links{ gap:16px; font-size:13px; }
+  .nav__toggle{ padding:5px 8px; font-size:12px; }
+  .nav__brand-icon{ width: 36px; height: 36px; }
+}
