@@ -1,0 +1,137 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 5049 >>
+stream
+BT /F2 16 Tf 147.88 797.89 Td (Diego Flores Aguirres - Professional CV) Tj ET
+BT /F2 13 Tf 48.00 759.89 Td (Professional Profile) Tj ET
+BT /F1 9.5 Tf 48.00 738.89 Td (Full Stack Developer with experience building web applications, desktop applications and business management) Tj ET
+BT /F1 9.5 Tf 48.00 726.89 Td (systems. Specialized in C#, JavaScript, React and Node.js, with solid knowledge of RESTful API design, data) Tj ET
+BT /F1 9.5 Tf 48.00 714.89 Td (modeling and relational databases \(SQL Server and MySQL\). Experienced in custom software solutions for) Tj ET
+BT /F1 9.5 Tf 48.00 702.89 Td (business processes across different industries, including process management and automation with tools such) Tj ET
+BT /F1 9.5 Tf 48.00 690.89 Td (as n8n. Adaptable, problem-solving and results-oriented profile, with fast learning skills and strong) Tj ET
+BT /F1 9.5 Tf 48.00 678.89 Td (teamwork capabilities.) Tj ET
+BT /F2 13 Tf 48.00 655.89 Td (Languages and Technologies) Tj ET
+BT /F1 9.5 Tf 48.00 634.89 Td (Programming languages: C#, JavaScript, Python, SQL) Tj ET
+BT /F1 9.5 Tf 48.00 619.89 Td (Frameworks: React.js, Node.js, Express, .NET) Tj ET
+BT /F1 9.5 Tf 48.00 604.89 Td (Databases: SQL Server, MySQL) Tj ET
+BT /F1 9.5 Tf 48.00 589.89 Td (Frontend: HTML5, CSS3, Bootstrap) Tj ET
+BT /F1 9.5 Tf 48.00 574.89 Td (Automation: n8n) Tj ET
+BT /F1 9.5 Tf 48.00 559.89 Td (Tools: Git, REST APIs, OpenCV, Office, Google Ads) Tj ET
+BT /F1 9.5 Tf 48.00 544.89 Td (Methodologies: Scrum) Tj ET
+BT /F2 13 Tf 48.00 521.89 Td (Professional Experience) Tj ET
+BT /F2 10.5 Tf 48.00 495.89 Td (Full Stack Developer Freelance) Tj ET
+BT /F1 9.5 Tf 48.00 481.89 Td (2022 - Present | Tucuman) Tj ET
+BT /F1 9.2 Tf 62.00 467.89 Td (- Built custom software solutions for different industries, including management systems, automation workflows) Tj ET
+BT /F1 9.2 Tf 62.00 456.39 Td (  and data analysis tools.) Tj ET
+BT /F2 10.5 Tf 48.00 437.89 Td (Full Stack Developer) Tj ET
+BT /F1 9.5 Tf 48.00 423.89 Td (Commercial management system - LA MONY) Tj ET
+BT /F1 9.5 Tf 48.00 409.89 Td (2023 - Present | Tucuman) Tj ET
+BT /F1 9.2 Tf 62.00 395.89 Td (- Designed, developed and implemented a web management system from scratch using JavaScript \(React and Node.js\)) Tj ET
+BT /F1 9.2 Tf 62.00 384.39 Td (  and MySQL.) Tj ET
+BT /F1 9.2 Tf 62.00 370.89 Td (- Automated key business processes: sales, inventory control, staff management and daily income/expense) Tj ET
+BT /F1 9.2 Tf 62.00 359.39 Td (  administration.) Tj ET
+BT /F1 9.2 Tf 62.00 345.89 Td (- Designed a multi-branch solution with role-based access control and centralized operations.) Tj ET
+BT /F1 9.2 Tf 62.00 332.39 Td (- Implemented user access logic with automatic branch assignment, allowing operation across multiple locations.) Tj ET
+BT /F1 9.2 Tf 62.00 318.89 Td (- Developed cash register control modules and monthly financial analysis features, improving organization and) Tj ET
+BT /F1 9.2 Tf 62.00 307.39 Td (  traceability.) Tj ET
+BT /F1 9.2 Tf 62.00 293.89 Td (- Deployed the system to production on a Linux \(Ubuntu\) VPS, configured the domain and enabled remote access) Tj ET
+BT /F1 9.2 Tf 62.00 282.39 Td (  for multiple branches.) Tj ET
+BT /F1 9.2 Tf 62.00 268.89 Td (- Implemented the system in 3 branches, currently in production and used daily.) Tj ET
+BT /F1 9.2 Tf 62.00 255.39 Td (- Owned an end-to-end role covering functional analysis, development, deployment, maintenance and system) Tj ET
+BT /F1 9.2 Tf 62.00 243.89 Td (  evolution.) Tj ET
+BT /F2 10.5 Tf 48.00 225.39 Td (Backend Developer) Tj ET
+BT /F1 9.5 Tf 48.00 211.39 Td (Electoral management system - Albornoz Programacion) Tj ET
+BT /F1 9.5 Tf 48.00 197.39 Td (2022 - 2023 | Tucuman - Santiago del Estero) Tj ET
+BT /F1 9.2 Tf 62.00 183.39 Td (- Developed a .NET desktop application \(C# - WinForms\) integrated with cloud-hosted SQL Server \(Azure / Google) Tj ET
+BT /F1 9.2 Tf 62.00 171.89 Td (  Cloud\).) Tj ET
+BT /F1 9.2 Tf 62.00 158.39 Td (- Implemented a system for electoral campaign management and analysis, enabling behavior evaluation by area and) Tj ET
+BT /F1 9.2 Tf 62.00 146.89 Td (  resource allocation optimization.) Tj ET
+BT /F1 9.2 Tf 62.00 133.39 Td (- Developed modules for voter registration, hierarchical party structures and mobilizer management.) Tj ET
+BT /F1 9.2 Tf 62.00 119.89 Td (- Implemented role- and level-based access control to segment functionality according to user profiles.) Tj ET
+BT /F1 9.2 Tf 62.00 106.39 Td (- Integrated electoral registry validation to verify identity and prevent duplicated DNI records.) Tj ET
+BT /F1 9.2 Tf 62.00 92.89 Td (- Processed large volumes of data and generated real-time information during the electoral process.) Tj ET
+BT /F1 9.2 Tf 62.00 79.39 Td (- Built reports and metrics for pre-election, election-day and post-election analysis, supporting strategic) Tj ET
+BT /F1 9.2 Tf 62.00 67.89 Td (  decision-making.) Tj ET
+BT /F1 9.2 Tf 62.00 54.39 Td (- Worked in a 4-developer team, focused on functional logic, backend and system flow design.) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 4085 >>
+stream
+BT /F2 10.5 Tf 48.00 797.89 Td (Full Stack Developer) Tj ET
+BT /F1 9.5 Tf 48.00 783.89 Td (Management system for distributor - Lomo Plateado SRL) Tj ET
+BT /F1 9.5 Tf 48.00 769.89 Td (2023 - 2024 | Tucuman) Tj ET
+BT /F1 9.2 Tf 62.00 755.89 Td (- Developed a web management system for a beverage distributor, optimizing inventory control and operational) Tj ET
+BT /F1 9.2 Tf 62.00 744.39 Td (  processes previously handled in Excel.) Tj ET
+BT /F1 9.2 Tf 62.00 730.89 Td (- Implemented a microservices-based architecture using Node.js, Python and MySQL to decouple key features.) Tj ET
+BT /F1 9.2 Tf 62.00 717.39 Td (- Designed and developed REST APIs for communication between microservices.) Tj ET
+BT /F1 9.2 Tf 62.00 703.89 Td (- Developed modules for customer management, suppliers, current accounts, orders and merchandise control.) Tj ET
+BT /F1 9.2 Tf 62.00 690.39 Td (- Implemented inventory control with dynamic indicators \(optimal, low, high\) to improve decision-making.) Tj ET
+BT /F1 9.2 Tf 62.00 676.89 Td (- Developed a solution for product batch creation and management.) Tj ET
+BT /F1 9.2 Tf 62.00 663.39 Td (- Automated contract generation and email delivery through independent services.) Tj ET
+BT /F1 9.2 Tf 62.00 649.89 Td (- Implemented daily reports and dashboards for data analysis and operational metrics.) Tj ET
+BT /F1 9.2 Tf 62.00 636.39 Td (- Significantly improved business management and control times.) Tj ET
+BT /F1 9.2 Tf 62.00 622.89 Td (- Worked in a 4-person team, participating in functional analysis, architecture and development.) Tj ET
+BT /F2 10.5 Tf 48.00 604.39 Td (AI Developer / Computer Vision) Tj ET
+BT /F1 9.5 Tf 48.00 590.39 Td (Computer vision system for classroom automation - UTN FRT) Tj ET
+BT /F1 9.5 Tf 48.00 576.39 Td (2023 | Tucuman) Tj ET
+BT /F1 9.2 Tf 62.00 562.39 Td (- Developed a computer vision system using Python and OpenCV for real-time person detection inside classrooms.) Tj ET
+BT /F1 9.2 Tf 62.00 548.89 Td (- Implemented logic for student counting and occupancy analysis, focused on automating resources such as) Tj ET
+BT /F1 9.2 Tf 62.00 537.39 Td (  lighting and climate control.) Tj ET
+BT /F1 9.2 Tf 62.00 523.89 Td (- Processed real-time frames using computer vision techniques, achieving accuracy levels above 75%.) Tj ET
+BT /F1 9.2 Tf 62.00 510.39 Td (- Designed an API-based integration with other systems responsible for classroom hardware control.) Tj ET
+BT /F1 9.2 Tf 62.00 496.89 Td (- Designed the solution with future extension to facial recognition for student attendance automation.) Tj ET
+BT /F1 9.2 Tf 62.00 483.39 Td (- Participated in an interdisciplinary project with electronics, systems and other areas, focused on energy) Tj ET
+BT /F1 9.2 Tf 62.00 471.89 Td (  optimization and technological modernization.) Tj ET
+BT /F1 9.2 Tf 62.00 458.39 Td (- Built the project from scratch in a 4-person team as a final degree project.) Tj ET
+BT /F1 9.2 Tf 62.00 444.89 Td (- Applied artificial intelligence and image processing techniques to solve real operational efficiency) Tj ET
+BT /F1 9.2 Tf 62.00 433.39 Td (  problems.) Tj ET
+BT /F2 13 Tf 48.00 411.89 Td (Education) Tj ET
+BT /F2 10.5 Tf 48.00 385.89 Td (University Technician in Programming) Tj ET
+BT /F1 9.5 Tf 48.00 371.89 Td (Universidad Tecnologica Nacional \(UTN\) - Facultad Regional Tucuman) Tj ET
+BT /F1 9.5 Tf 48.00 357.89 Td (2022 - 2024 | Tucuman) Tj ET
+BT /F2 10.5 Tf 48.00 338.89 Td (Information Systems Engineering \(incomplete\)) Tj ET
+BT /F1 9.5 Tf 48.00 324.89 Td (Universidad Tecnologica Nacional \(UTN\) - Facultad Regional Tucuman) Tj ET
+BT /F1 9.5 Tf 48.00 310.89 Td (2013 - 2019 | Tucuman) Tj ET
+BT /F2 13 Tf 48.00 288.89 Td (Contact) Tj ET
+BT /F1 9.5 Tf 48.00 267.89 Td (Phone: +5493816155136) Tj ET
+BT /F1 9.5 Tf 48.00 252.89 Td (Email: floresdiego2012@gmail.com) Tj ET
+BT /F1 9.5 Tf 48.00 237.89 Td (LinkedIn: https://www.linkedin.com/in/diego-flores-7b433076/) Tj ET
+BT /F1 9.5 Tf 48.00 222.89 Td (GitHub: https://github.com/DiegoF23) Tj ET
+BT /F1 9.5 Tf 48.00 207.89 Td (Portfolio: https://diegof-porfolio.netlify.app/) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+xref
+0 9
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000191 00000 n 
+0000000266 00000 n 
+0000005366 00000 n 
+0000005508 00000 n 
+0000009644 00000 n 
+trailer
+<< /Size 9 /Root 1 0 R >>
+startxref
+9786
+%%EOF

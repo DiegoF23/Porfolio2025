@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://diegof-porfolio.netlify.app/sitemap.xml
