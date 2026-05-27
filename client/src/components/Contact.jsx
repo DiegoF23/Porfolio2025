@@ -10,7 +10,7 @@ export default function Contact() {
   const MAILTO_URL = `mailto:${t.contact.email}?subject=${encodeURIComponent(t.contact.emailSubject)}&body=${encodeURIComponent(t.contact.emailBody)}`;
 
   const GITHUB_URL = "https://github.com/DiegoF23";
-  const LINKEDIN_URL = "https://www.linkedin.com/in/diego-flores-7b433076/";
+  const LINKEDIN_URL = "https://www.linkedin.com/in/diego-flores-7b433076";
   const INSTAGRAM_URL = "https://www.instagram.com/diegofloresdev/?igsh=MWtybW9scmoycWZ1aw%3D%3D#";
 
   return (

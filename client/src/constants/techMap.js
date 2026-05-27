@@ -1,4 +1,4 @@
-import { FaHtml5, FaCss3Alt, FaPython, FaNodeJs, FaReact, FaGitAlt, FaAngular, FaGithub } from "react-icons/fa";
+import { FaHtml5, FaCss3Alt, FaPython, FaNodeJs, FaReact, FaGitAlt, FaAngular, FaGithub, FaCloud, FaRobot } from "react-icons/fa";
 import { IoLogoJavascript } from "react-icons/io5";
 import { SiExpress, SiLeaflet, SiOpencv, SiTypescript, SiDotnet, SiMercadopago, SiGooglemaps, SiMysql } from "react-icons/si";
 import { DiMsqlServer, DiMysql, DiScrum } from "react-icons/di";
@@ -28,6 +28,8 @@ export const TECH_MAP = {
   opencv:     { label: "OpenCV",        Icon: SiOpencv },
   mercadopago:{ label: "Mercado Pago",  Icon: SiMercadopago },
   googlemaps: { label: "Google Maps",   Icon: SiGooglemaps },
+  ai:         { label: "AI / Agentes",  Icon: FaRobot },
+  cloud:      { label: "Cloud",         Icon: FaCloud },
 };
 
 export const TECH_LIST = [
@@ -38,6 +40,8 @@ export const TECH_LIST = [
   { id: 'python',     label: 'Python',      Icon: FaPython },
   { id: 'csharp',     label: 'C#',          Icon: TbBrandCSharp },
   { id: 'dotnet',     label: '.NET',        Icon: SiDotnet },
+  { id: 'ai',         label: 'AI / Agentes', Icon: FaRobot },
+  { id: 'cloud',      label: 'Cloud',         Icon: FaCloud },
   { id: 'node',       label: 'Node.js',     Icon: FaNodeJs },
   { id: 'express',    label: 'Express',     Icon: SiExpress },
   { id: 'react',      label: 'React',       Icon: FaReact },
