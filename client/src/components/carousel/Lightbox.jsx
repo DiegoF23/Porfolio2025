@@ -1,10 +1,13 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useLanguage } from "../../context/LanguageContext";
+
+const SWIPE_THRESHOLD = 50;
 
 export default function Lightbox({ images = [], startIndex = 0, onClose }) {
   const [index, setIndex] = useState(startIndex);
   const dialogRef = useRef(null);
   const closeButtonRef = useRef(null);
+  const touchStartX = useRef(0);
   const { t } = useLanguage();
 
   const slides = (images || []).map(it =>
@@ -12,8 +15,19 @@ export default function Lightbox({ images = [], startIndex = 0, onClose }) {
   );
   const size = slides.length;
 
-  const prev = () => setIndex((i) => ((i - 1) % size + size) % size);
-  const next = () => setIndex((i) => (i + 1) % size);
+  const prev = useCallback(() => setIndex((i) => ((i - 1) % size + size) % size), [size]);
+  const next = useCallback(() => setIndex((i) => (i + 1) % size), [size]);
+
+  // Touch swipe
+  const onTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const onTouchEnd = (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(dx) < SWIPE_THRESHOLD) return;
+    if (dx > 0) prev();
+    else next();
+  };
 
   useEffect(() => {
     const previousActiveElement = document.activeElement;
@@ -52,7 +66,12 @@ export default function Lightbox({ images = [], startIndex = 0, onClose }) {
   return (
     <div className="lightbox" role="dialog" aria-modal="true">
       <div className="lightbox__backdrop" onClick={onClose} />
-      <div className="lightbox__content" ref={dialogRef}>
+      <div
+        className="lightbox__content"
+        ref={dialogRef}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
         <div className="lightbox__slide lightbox__slide--active">
           {s.type === "video" ? (
             <video className="lightbox__media" src={s.src} poster={s.poster} controls autoPlay playsInline />

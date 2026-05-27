@@ -312,25 +312,47 @@
 .lightbox__close{
   position: absolute; top: 10px; right: 10px;
   width: 36px; height: 36px;
-  border-radius: 999px; border: 1px solid var(--border);
-  background: var(--btn-bg);
-  color: var(--text);
+  border-radius: 999px; border: 1px solid rgba(255,255,255,.18);
+  background: rgba(0,0,0,.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 16px;
   cursor: pointer;
   z-index: 10;
+  box-shadow: 0 2px 12px rgba(0,0,0,.4);
 }
 
 .lightbox__arrow{
   position: absolute; top: 50%;
   transform: translateY(-50%);
   width: 42px; height: 42px;
-  border-radius: 999px; border: 1px solid var(--border);
-  background: var(--btn-bg);
-  color: var(--text);
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(0,0,0,.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
   cursor: pointer;
   z-index: 10;
+  box-shadow: 0 2px 12px rgba(0,0,0,.4);
+  display: grid; place-items: center;
 }
 .lightbox__arrow.left{ left: 12px; }
 .lightbox__arrow.right{ right: 12px; }
+
+@media (max-width: 900px){
+  .lightbox__arrow{
+    width: 48px; height: 48px;
+    font-size: 26px;
+  }
+  .lightbox__close{
+    width: 40px; height: 40px;
+    font-size: 18px;
+  }
+}
 
 .lightbox__dots{
   position: absolute; bottom: 10px; left: 50%;
