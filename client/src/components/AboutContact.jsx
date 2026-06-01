@@ -5,8 +5,7 @@ import "../styles/AboutContact.css";
 
 /**
  * Wrapper de “Sobre mí” + “Contacto”.
- * - Desktop: 2 columnas
- * - Mobile: 1 columna (apilados)
+ * - Desktop y mobile: 1 columna (apilados)
  * - Usa .container para alinear con el resto del layout
  */
 export default function AboutContact() {

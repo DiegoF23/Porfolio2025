@@ -18,10 +18,15 @@ export default function Hero() {
           <p className="hero__tagline">
             {t.hero.tagline}
           </p>
-          <div className="hero__cta" role="group" aria-label={t.hero.viewCV}>
-            <a className="btn btn--solid" href={cvFile} target="_blank" rel="noopener noreferrer">{t.hero.viewCV}</a>
-            <a className="btn btn--ghost" href={cvFile} download>{t.hero.downloadCV}</a>
+          <div className="hero__cta" role="group" aria-label={t.hero.viewProjects}>
+            <a className="btn btn--solid" href="#projects">{t.hero.viewProjects}</a>
+            <a className="btn btn--ghost" href={cvFile} target="_blank" rel="noopener noreferrer">{t.hero.viewCV}</a>
+            <a className="btn btn--ghost btn--soft" href={cvFile} download>{t.hero.downloadCV}</a>
           </div>
+          <a className="hero__scrollcue" href="#projects" aria-label={t.hero.scrollCue}>
+            <span className="hero__scrollcue-text">{t.hero.scrollCue}</span>
+            <span className="hero__scrollcue-arrow" aria-hidden="true">↓</span>
+          </a>
         </header>
 
         <div className="hero__photo-wrapper" aria-label="Foto de perfil">
