@@ -27,20 +27,26 @@ export default function ProjectCard({ p }) {
   const [lbIndex, setLbIndex] = useState(0);
   const { lang, t } = useLanguage();
 
-  const MAX_CH = 140;
   const description = p.description[lang] || p.description.es;
+  const summary = p.summary?.[lang] || p.summary?.es || description;
+  const outcome = p.outcome?.[lang] || p.outcome?.es;
   const title = p.title[lang] || p.title.es;
-  const hasLong = description && description.length > MAX_CH;
-  const preview = hasLong ? description.slice(0, MAX_CH).trim() + "…" : description;
+  const hasLong = Boolean(description && summary && description !== summary);
   const techList = p.tech || [];
+  const metrics = p.metrics || [];
   const shouldMarqueeTech = techList.length > 7;
   const techAria = lang === "es" ? "Tecnologías del proyecto" : "Project technologies";
+  const categoryLabel = {
+    featured: lang === "es" ? "Destacado" : "Featured",
+    professional: lang === "es" ? "Profesional" : "Professional",
+    educational: lang === "es" ? "Formación" : "Educational",
+  };
 
   const openLightbox = (idx = 0) => { setLbIndex(idx); setShowLb(true); };
   const closeLightbox = () => setShowLb(false);
 
   return (
-    <article className="card project-card">
+    <article className={`card project-card${p.featured ? " project-card--featured" : ""}`}>
       <div className="project__img">
         <Carousel images={p.images || []} onOpen={openLightbox} />
       </div>
@@ -59,11 +65,31 @@ export default function ProjectCard({ p }) {
         </div>
       )}
 
+      <div className="project__meta">
+        <span className="project__badge">{categoryLabel[p.category] || categoryLabel.professional}</span>
+      </div>
+
       <h3 className="project__title">{title}</h3>
 
       <p className="project__desc">
-        {expanded ? description : preview}
+        {expanded && hasLong ? description : summary}
       </p>
+
+      {outcome && <p className="project__outcome">{outcome}</p>}
+
+      {!!metrics.length && (
+        <ul className="project__metrics" aria-label={lang === "es" ? "Impacto del proyecto" : "Project impact"}>
+          {metrics.map((metric, i) => {
+            const label = metric.label?.[lang] || metric.label?.es || "";
+            return (
+              <li key={`${label}-${metric.value}-${i}`} className="project__metric">
+                {label && <span className="project__metric-label">{label}</span>}
+                <span className="project__metric-value">{metric.value}</span>
+              </li>
+            );
+          })}
+        </ul>
+      )}
 
       <div className="project__actions">
         {hasLong && (

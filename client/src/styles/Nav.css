@@ -12,9 +12,21 @@
 }
 .nav__inner{
   display:flex; align-items:center; justify-content:space-between;
-  height:100%; padding:0 20px;
+  height:100%; padding:0 20px; gap: 14px;
 }
-.nav__links{ display:flex; gap:28px; color:var(--accent); font-size:14px; }
+.nav__links{
+  display:flex;
+  flex: 1 1 auto;
+  justify-content:center;
+  gap:28px;
+  min-width: 0;
+  color:var(--accent);
+  font-size:14px;
+  white-space: nowrap;
+}
+.nav__links a{
+  white-space: nowrap;
+}
 .nav__brand{
   display: inline-flex;
   align-items: center;
@@ -30,7 +42,7 @@
 
 /* Controles del nav (tema + idioma) */
 .nav__controls{
-  display:flex; gap:8px; align-items:center;
+  display:flex; gap:8px; align-items:center; flex: 0 0 auto;
 }
 .nav__toggle{
   display:inline-flex; align-items:center; justify-content:center;
@@ -84,7 +96,15 @@ html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
 
 /* Responsive: en mobile, compactar controles */
 @media (max-width: 700px){
-  .nav__links{ gap:16px; font-size:13px; }
+  .nav__inner{ padding: 0 14px; gap: 10px; }
+  .nav__links{ gap:12px; font-size:12px; }
   .nav__toggle{ padding:5px 8px; font-size:12px; }
   .nav__brand-icon{ width: 36px; height: 36px; }
+}
+
+@media (max-width: 420px){
+  .nav__inner{ padding: 0 10px; gap: 8px; }
+  .nav__links{ gap:8px; font-size:11px; letter-spacing: -.01em; }
+  .nav__toggle{ padding:4px 7px; font-size:11px; }
+  .nav__brand-icon{ width: 32px; height: 32px; border-radius: 9px; }
 }

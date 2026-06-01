@@ -14,9 +14,11 @@ const translations = {
     },
     hero: {
       greeting: "HOLA, SOY",
-      tagline: "Desarrollador de software especializado en aplicaciones web y de escritorio.",
+      tagline: "Construyo productos web y de escritorio que ordenan operaciones, aceleran decisiones y convierten necesidades reales en software confiable.",
+      viewProjects: "Ver proyectos",
       viewCV: "Ver CV",
       downloadCV: "Descargar CV",
+      scrollCue: "Explorá casos reales",
       techAria: "Tecnologías",
     },
     projects: {
@@ -73,9 +75,11 @@ const translations = {
     },
     hero: {
       greeting: "HI, I'M",
-      tagline: "Software developer specialized in web and desktop applications.",
+      tagline: "I build web and desktop products that streamline operations, speed up decisions, and turn real business needs into reliable software.",
+      viewProjects: "See projects",
       viewCV: "View CV",
       downloadCV: "Download CV",
+      scrollCue: "Explore real projects",
       techAria: "Technologies",
     },
     projects: {

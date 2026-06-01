@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { useLanguage } from "../../context/LanguageContext";
 
 const SWIPE_THRESHOLD = 50;
@@ -32,7 +33,9 @@ export default function Lightbox({ images = [], startIndex = 0, onClose }) {
   useEffect(() => {
     const previousActiveElement = document.activeElement;
     const previousOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
     closeButtonRef.current?.focus();
 
     const onKey = (e) => {
@@ -55,6 +58,7 @@ export default function Lightbox({ images = [], startIndex = 0, onClose }) {
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = previousOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
       previousActiveElement?.focus?.();
     };
   }, [size, onClose]);
@@ -63,12 +67,13 @@ export default function Lightbox({ images = [], startIndex = 0, onClose }) {
 
   const s = slides[index];
 
-  return (
+  const content = (
     <div className="lightbox" role="dialog" aria-modal="true">
       <div className="lightbox__backdrop" onClick={onClose} />
       <div
         className="lightbox__content"
         ref={dialogRef}
+        onClick={(e) => e.stopPropagation()}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
@@ -101,4 +106,6 @@ export default function Lightbox({ images = [], startIndex = 0, onClose }) {
       </div>
     </div>
   );
+
+  return createPortal(content, document.body);
 }
